@@ -1,5 +1,7 @@
 # battlenet-api for Android
 
+[![Build Status](https://travis-ci.org/galex/battlenet-api.svg?branch=master)](https://travis-ci.org/galex/battlenet-api)
+
 # Introduction
 
 This library gives you access to the APIS of Battle.net (Blizzard), based on [Retrofit](http://square.github.io/retrofit/).
