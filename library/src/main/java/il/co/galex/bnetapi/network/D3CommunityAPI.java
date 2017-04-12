@@ -21,8 +21,7 @@ import retrofit2.Retrofit;
  *
  * @author Alexander Gherschon
  */
-
-public class Diablo3CommunityAPI {
+public class D3CommunityAPI {
 
     // PROFILE API
 
@@ -30,17 +29,13 @@ public class Diablo3CommunityAPI {
     public static CareerProfile getCareerProfile(Context context, Region region, BattleTag battleTag, Locale locale) {
 
         Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
-        Diablo3CommunityService service = retrofit.create(Diablo3CommunityService.class);
+        D3CommunityService service = retrofit.create(D3CommunityService.class);
 
         Call<CareerProfile> call = service.getCareerProfile(battleTag.getApiFormat(), locale.getValue());
 
         try {
             Response<CareerProfile> response = call.execute();
-
-            if(response.code() == 200) {
-                return response.body();
-            }
-
+            if (response.code() == 200) return response.body();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,7 +46,7 @@ public class Diablo3CommunityAPI {
     public static void getCareerProfile(Context context, Region region, BattleTag battleTag, Locale locale, Callback<CareerProfile> callback) {
 
         Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
-        Diablo3CommunityService service = retrofit.create(Diablo3CommunityService.class);
+        D3CommunityService service = retrofit.create(D3CommunityService.class);
 
         Call<CareerProfile> call = service.getCareerProfile(battleTag.getApiFormat(), locale.getValue());
         call.enqueue(callback);

@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="il.co.galex.bnetapi">
+    package="il.co.galex.bnetapi.testpp">
 
     <application
         android:allowBackup="true"

@@ -12,7 +12,7 @@ import retrofit2.http.Query;
  * @author Alexander Gherschon
  */
 
-public interface Diablo3CommunityService {
+interface D3CommunityService {
 
     @GET("d3/profile/{battleTag}/")
     Call<CareerProfile> getCareerProfile(@Path("battleTag") String battleTag, @Query("locale") String locale);
