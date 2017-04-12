@@ -15,7 +15,7 @@ This library gives you access to the APIS of Battle.net (Blizzard), based on [Re
 
 # Library API
 
-* **D3 Community API** => Diablo3CommunityAPI class
+* **D3 Community API** => D3CommunityAPI class
 
 # Configuration
 
