@@ -12,9 +12,9 @@ class Hero {
     private String name;
 
     @SerializedName("class")
-    private String heroClass;
+    private HeroClass heroClass;
 
-    private int gender;
+    private Gender gender;
     private int level;
     private int paragonLevel;
     private boolean hardcore;
@@ -43,19 +43,19 @@ class Hero {
         this.name = name;
     }
 
-    public String getHeroClass() {
+    public HeroClass getHeroClass() {
         return heroClass;
     }
 
-    public void setHeroClass(String heroClass) {
+    public void setHeroClass(HeroClass heroClass) {
         this.heroClass = heroClass;
     }
 
-    public int getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -113,7 +113,7 @@ class Hero {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", heroClass='" + heroClass + '\'' +
-                ", gender=" + gender +
+                ", gender=" + gender.name() +
                 ", level=" + level +
                 ", paragonLevel=" + paragonLevel +
                 ", hardcore=" + hardcore +

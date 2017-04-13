@@ -11,8 +11,8 @@ public class SeasonProfile {
     private int seasonId;
     private long paragonLevel;
     private long paragonLevelHardcore;
-    private HashMap<String, String> kills;
-    private HashMap<String, String> timePlayed;
+    private HashMap<Mob, Long> kills;
+    private HashMap<HeroClass, Float> timePlayed;
     private long highestHardcoreLevel;
 
     public int getSeasonId() {
@@ -39,19 +39,19 @@ public class SeasonProfile {
         this.paragonLevelHardcore = paragonLevelHardcore;
     }
 
-    public HashMap<String, String> getKills() {
+    public HashMap<Mob, Long> getKills() {
         return kills;
     }
 
-    public void setKills(HashMap<String, String> kills) {
+    public void setKills(HashMap<Mob, Long> kills) {
         this.kills = kills;
     }
 
-    public HashMap<String, String> getTimePlayed() {
+    public HashMap<HeroClass, Float> getTimePlayed() {
         return timePlayed;
     }
 
-    public void setTimePlayed(HashMap<String, String> timePlayed) {
+    public void setTimePlayed(HashMap<HeroClass, Float> timePlayed) {
         this.timePlayed = timePlayed;
     }
 

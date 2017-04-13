@@ -18,10 +18,10 @@ public class CareerProfile {
     private List<Hero> heroes;
     private long lastHeroPlayed;
     private long lastHeroUpdated;
-    private HashMap<String, String> kills;
+    private HashMap<Mob, Long> kills;
     private long highestHardcoreLevel;
-    private HashMap<String, String> timePlayed;
-    private HashMap<String, Boolean> progression;
+    private HashMap<HeroClass, Float> timePlayed;
+    private HashMap<Act, Boolean> progression;
     private List<Hero> fallenHeroes;
     private Artisan blacksmith;
     private Artisan jeweler;
@@ -103,11 +103,11 @@ public class CareerProfile {
         this.lastHeroUpdated = lastHeroUpdated;
     }
 
-    public HashMap<String, String> getKills() {
+    public HashMap<Mob, Long> getKills() {
         return kills;
     }
 
-    public void setKills(HashMap<String, String> kills) {
+    public void setKills(HashMap<Mob, Long> kills) {
         this.kills = kills;
     }
 
@@ -119,19 +119,19 @@ public class CareerProfile {
         this.highestHardcoreLevel = highestHardcoreLevel;
     }
 
-    public HashMap<String, String> getTimePlayed() {
+    public HashMap<HeroClass, Float> getTimePlayed() {
         return timePlayed;
     }
 
-    public void setTimePlayed(HashMap<String, String> timePlayed) {
+    public void setTimePlayed(HashMap<HeroClass, Float> timePlayed) {
         this.timePlayed = timePlayed;
     }
 
-    public HashMap<String, Boolean> getProgression() {
+    public HashMap<Act, Boolean> getProgression() {
         return progression;
     }
 
-    public void setProgression(HashMap<String, Boolean> progression) {
+    public void setProgression(HashMap<Act, Boolean> progression) {
         this.progression = progression;
     }
 

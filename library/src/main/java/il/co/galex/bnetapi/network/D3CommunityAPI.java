@@ -17,13 +17,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
- * Retrofit service to Diablo 3 Community API
+ * Diablo 3 Community API
  *
  * @author Alexander Gherschon
  */
 public class D3CommunityAPI {
-
-    // PROFILE API
 
     @WorkerThread
     public static CareerProfile getCareerProfile(Context context, Region region, BattleTag battleTag, Locale locale) {
