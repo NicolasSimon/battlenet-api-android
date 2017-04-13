@@ -3,7 +3,6 @@ package il.co.galex.bnetapi.model.career;
 import java.util.HashMap;
 import java.util.List;
 
-import il.co.galex.bnetapi.model.common.Act;
 import il.co.galex.bnetapi.model.common.HeroClass;
 import il.co.galex.bnetapi.model.common.Mob;
 

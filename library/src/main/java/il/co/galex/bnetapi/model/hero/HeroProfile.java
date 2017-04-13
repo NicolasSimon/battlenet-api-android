@@ -34,10 +34,13 @@ public class HeroProfile {
 
     private HeroItems items;
     private Followers followers;
-
     private List<Item> legendaryPowers;
-
     private HeroStats stats;
+    private Progression progression;
+    private Boolean dead;
+
+    @SerializedName("last-updated")
+    private Long lastUpdated;
 
     public long getId() {
         return id;
@@ -135,14 +138,6 @@ public class HeroProfile {
         this.items = items;
     }
 
-    public List<Item> getLegendaryPowers() {
-        return legendaryPowers;
-    }
-
-    public void setLegendaryPowers(List<Item> legendaryPowers) {
-        this.legendaryPowers = legendaryPowers;
-    }
-
     public Followers getFollowers() {
         return followers;
     }
@@ -151,11 +146,67 @@ public class HeroProfile {
         this.followers = followers;
     }
 
+    public List<Item> getLegendaryPowers() {
+        return legendaryPowers;
+    }
+
+    public void setLegendaryPowers(List<Item> legendaryPowers) {
+        this.legendaryPowers = legendaryPowers;
+    }
+
     public HeroStats getStats() {
         return stats;
     }
 
     public void setStats(HeroStats stats) {
         this.stats = stats;
+    }
+
+    public Progression getProgression() {
+        return progression;
+    }
+
+    public void setProgression(Progression progression) {
+        this.progression = progression;
+    }
+
+    public Boolean getDead() {
+        return dead;
+    }
+
+    public void setDead(Boolean dead) {
+        this.dead = dead;
+    }
+
+    public Long getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Long lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", heroClass=" + heroClass +
+                ", gender=" + gender +
+                ", level=" + level +
+                ", kills=" + kills +
+                ", paragonLevel=" + paragonLevel +
+                ", hardcore=" + hardcore +
+                ", seasonal=" + seasonal +
+                ", seasonCreated=" + seasonCreated +
+                ", skillSet=" + skillSet +
+                ", items=" + items +
+                ", followers=" + followers +
+                ", legendaryPowers=" + legendaryPowers +
+                ", stats=" + stats +
+                ", progression=" + progression +
+                ", dead=" + dead +
+                ", lastUpdated=" + lastUpdated +
+                '}';
     }
 }

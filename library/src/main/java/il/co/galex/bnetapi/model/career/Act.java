@@ -1,4 +1,4 @@
-package il.co.galex.bnetapi.model.common;
+package il.co.galex.bnetapi.model.career;
 
 import com.google.gson.annotations.SerializedName;
 
