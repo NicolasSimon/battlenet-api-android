@@ -1,21 +1,20 @@
-package il.co.galex.bnetapi.model;
+package il.co.galex.bnetapi.model.hero;
 
 /**
  * @author Alexander Gherschon
  */
 
-public class Skill {
+public class Rune {
 
     private String slug;
+    private String type;
     private String name;
-    private String icon;
-
     private int level;
-    private String categorySlug;
-    private String tooltipUrl;
     private String description;
     private String simpleDescription;
+    private String tooltipParams;
     private String skillCalcId;
+    private int order;
 
     public String getSlug() {
         return slug;
@@ -23,6 +22,14 @@ public class Skill {
 
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getName() {
@@ -33,36 +40,12 @@ public class Skill {
         this.name = name;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
     public int getLevel() {
         return level;
     }
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public String getCategorySlug() {
-        return categorySlug;
-    }
-
-    public void setCategorySlug(String categorySlug) {
-        this.categorySlug = categorySlug;
-    }
-
-    public String getTooltipUrl() {
-        return tooltipUrl;
-    }
-
-    public void setTooltipUrl(String tooltipUrl) {
-        this.tooltipUrl = tooltipUrl;
     }
 
     public String getDescription() {
@@ -81,6 +64,14 @@ public class Skill {
         this.simpleDescription = simpleDescription;
     }
 
+    public String getTooltipParams() {
+        return tooltipParams;
+    }
+
+    public void setTooltipParams(String tooltipParams) {
+        this.tooltipParams = tooltipParams;
+    }
+
     public String getSkillCalcId() {
         return skillCalcId;
     }
@@ -89,18 +80,26 @@ public class Skill {
         this.skillCalcId = skillCalcId;
     }
 
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "slug='" + slug + '\'' +
+                ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
-                ", icon='" + icon + '\'' +
                 ", level=" + level +
-                ", categorySlug='" + categorySlug + '\'' +
-                ", tooltipUrl='" + tooltipUrl + '\'' +
                 ", description='" + description + '\'' +
                 ", simpleDescription='" + simpleDescription + '\'' +
+                ", tooltipParams='" + tooltipParams + '\'' +
                 ", skillCalcId='" + skillCalcId + '\'' +
+                ", order=" + order +
                 '}';
     }
 }

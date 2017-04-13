@@ -1,7 +1,7 @@
 package il.co.galex.bnetapi.network;
 
-import il.co.galex.bnetapi.model.CareerProfile;
-import il.co.galex.bnetapi.model.HeroProfile;
+import il.co.galex.bnetapi.model.career.CareerProfile;
+import il.co.galex.bnetapi.model.hero.HeroProfile;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

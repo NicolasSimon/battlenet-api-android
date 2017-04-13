@@ -1,20 +1,21 @@
-package il.co.galex.bnetapi.model;
+package il.co.galex.bnetapi.model.hero;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * @author Alexander Gherschon
  */
 
-public class TransmogItem {
+public class Item {
 
     private String id;
     private String name;
     private String icon;
     private String displayColor;
     private String tooltipParams;
+    private TransmogItem transmogItem;
     private List<String> setItemsEquipped;
+    private DyeColor dyeColor;
 
     public String getId() {
         return id;
@@ -56,6 +57,14 @@ public class TransmogItem {
         this.tooltipParams = tooltipParams;
     }
 
+    public TransmogItem getTransmogItem() {
+        return transmogItem;
+    }
+
+    public void setTransmogItem(TransmogItem transmogItem) {
+        this.transmogItem = transmogItem;
+    }
+
     public List<String> getSetItemsEquipped() {
         return setItemsEquipped;
     }
@@ -63,4 +72,27 @@ public class TransmogItem {
     public void setSetItemsEquipped(List<String> setItemsEquipped) {
         this.setItemsEquipped = setItemsEquipped;
     }
+
+    public DyeColor getDyeColor() {
+        return dyeColor;
+    }
+
+    public void setDyeColor(DyeColor dyeColor) {
+        this.dyeColor = dyeColor;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", icon='" + icon + '\'' +
+                ", displayColor='" + displayColor + '\'' +
+                ", tooltipParams='" + tooltipParams + '\'' +
+                ", transmogItem=" + transmogItem +
+                ", setItemsEquipped=" + setItemsEquipped +
+                ", dyeColor=" + dyeColor +
+                '}';
+    }
 }
+

@@ -1,4 +1,4 @@
-package il.co.galex.bnetapi.model;
+package il.co.galex.bnetapi.model.common;
 
 /**
  * Represents the different available locales

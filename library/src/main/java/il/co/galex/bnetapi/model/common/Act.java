@@ -1,4 +1,4 @@
-package il.co.galex.bnetapi.model;
+package il.co.galex.bnetapi.model.common;
 
 import com.google.gson.annotations.SerializedName;
 

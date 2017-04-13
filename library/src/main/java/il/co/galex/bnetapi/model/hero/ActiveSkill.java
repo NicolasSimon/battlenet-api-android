@@ -1,4 +1,4 @@
-package il.co.galex.bnetapi.model;
+package il.co.galex.bnetapi.model.hero;
 
 /**
  * @author Alexander Gherschon

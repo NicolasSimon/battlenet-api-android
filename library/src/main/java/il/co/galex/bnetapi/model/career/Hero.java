@@ -1,12 +1,15 @@
-package il.co.galex.bnetapi.model;
+package il.co.galex.bnetapi.model.career;
 
 import com.google.gson.annotations.SerializedName;
+
+import il.co.galex.bnetapi.model.common.Gender;
+import il.co.galex.bnetapi.model.common.HeroClass;
 
 /**
  * @author Alexander Gherschon
  */
 
-class Hero {
+public class Hero {
 
     private long id;
     private String name;

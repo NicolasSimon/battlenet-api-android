@@ -1,8 +1,12 @@
-package il.co.galex.bnetapi.model;
+package il.co.galex.bnetapi.model.hero;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.HashMap;
+
+import il.co.galex.bnetapi.model.common.Gender;
+import il.co.galex.bnetapi.model.common.HeroClass;
+import il.co.galex.bnetapi.model.common.Mob;
 
 /**
  * @author Alexander Gherschon

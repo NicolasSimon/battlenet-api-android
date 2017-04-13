@@ -7,11 +7,11 @@ import android.support.annotation.WorkerThread;
 
 import java.io.IOException;
 
-import il.co.galex.bnetapi.model.CareerProfile;
-import il.co.galex.bnetapi.model.HeroProfile;
-import il.co.galex.bnetapi.model.Locale;
-import il.co.galex.bnetapi.model.Region;
-import il.co.galex.bnetapi.model.BattleTag;
+import il.co.galex.bnetapi.model.career.CareerProfile;
+import il.co.galex.bnetapi.model.hero.HeroProfile;
+import il.co.galex.bnetapi.model.common.Locale;
+import il.co.galex.bnetapi.model.common.Region;
+import il.co.galex.bnetapi.model.common.BattleTag;
 import il.co.galex.bnetapi.utils.RetrofitUtils;
 import retrofit2.Call;
 import retrofit2.Callback;

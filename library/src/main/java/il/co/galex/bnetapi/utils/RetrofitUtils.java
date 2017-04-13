@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import il.co.galex.bnetapi.BuildConfig;
 import il.co.galex.bnetapi.R;
-import il.co.galex.bnetapi.model.Region;
+import il.co.galex.bnetapi.model.common.Region;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
