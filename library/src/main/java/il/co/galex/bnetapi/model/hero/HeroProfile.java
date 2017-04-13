@@ -3,6 +3,7 @@ package il.co.galex.bnetapi.model.hero;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.HashMap;
+import java.util.List;
 
 import il.co.galex.bnetapi.model.common.Gender;
 import il.co.galex.bnetapi.model.common.HeroClass;
@@ -32,6 +33,11 @@ public class HeroProfile {
     private SkillSet skillSet;
 
     private HeroItems items;
+    private Followers followers;
+
+    private List<Item> legendaryPowers;
+
+    private HeroStats stats;
 
     public long getId() {
         return id;
@@ -129,21 +135,27 @@ public class HeroProfile {
         this.items = items;
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", heroClass=" + heroClass +
-                ", gender=" + gender +
-                ", level=" + level +
-                ", kills=" + kills +
-                ", paragonLevel=" + paragonLevel +
-                ", hardcore=" + hardcore +
-                ", seasonal=" + seasonal +
-                ", seasonCreated=" + seasonCreated +
-                ", skillSet=" + skillSet +
-                ", items=" + items +
-                '}';
+    public List<Item> getLegendaryPowers() {
+        return legendaryPowers;
+    }
+
+    public void setLegendaryPowers(List<Item> legendaryPowers) {
+        this.legendaryPowers = legendaryPowers;
+    }
+
+    public Followers getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Followers followers) {
+        this.followers = followers;
+    }
+
+    public HeroStats getStats() {
+        return stats;
+    }
+
+    public void setStats(HeroStats stats) {
+        this.stats = stats;
     }
 }
