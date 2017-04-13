@@ -18,7 +18,8 @@ interface D3CommunityService {
     @GET("d3/profile/{battleTag}/")
     Call<CareerProfile> getCareerProfile(@Path("battleTag") String battleTag, @Query("locale") String locale);
 
-    //Call<HeroProfile> getHeroProfile(@Path("battleTag") String battleTag, @Query("locale") String locale, )
+    @GET("d3/profile/{battleTag}/hero/{heroId}")
+    Call<HeroProfile> getHeroProfile(@Path("battleTag") String battleTag, @Path("heroId") Long heroId, @Query("locale") String locale);
 }
 
 
