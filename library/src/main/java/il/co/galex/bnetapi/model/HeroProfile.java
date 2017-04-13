@@ -27,6 +27,8 @@ public class HeroProfile {
     @SerializedName("skills")
     private SkillSet skillSet;
 
+    private HeroItems items;
+
     public long getId() {
         return id;
     }
@@ -115,6 +117,14 @@ public class HeroProfile {
         this.skillSet = skillSet;
     }
 
+    public HeroItems getItems() {
+        return items;
+    }
+
+    public void setItems(HeroItems items) {
+        this.items = items;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -129,6 +139,7 @@ public class HeroProfile {
                 ", seasonal=" + seasonal +
                 ", seasonCreated=" + seasonCreated +
                 ", skillSet=" + skillSet +
+                ", items=" + items +
                 '}';
     }
 }

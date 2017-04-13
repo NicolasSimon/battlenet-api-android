@@ -4,9 +4,9 @@
 
 # Introduction
 
-This library gives you access to the APIS of Battle.net (Blizzard), based on [Retrofit](http://square.github.io/retrofit/).
+This library gives you access to the [APIs of Battle.net](https://dev.battle.net/io-docs) based on the [Retrofit](http://square.github.io/retrofit/) library.
 
-# Available APIS
+# Available APIs
 
 ### D3 Community API 
 
@@ -17,16 +17,38 @@ This library gives you access to the APIS of Battle.net (Blizzard), based on [Re
 
 # Library API
 
-* **D3 Community API** => D3CommunityAPI class
+## Entry points
+
+For every implemented entry point you get a class of the same name to access the API. 
+
+Example: to call the CareerProfile of the D3 Community API:
+
+```java
+BattleTag battleTag = new BattleTag(USERNAME, NUMBER);
+CareerProfile careerProfile = D3CommunityAPI.getCareerProfile(context, Region.EU, battleTag, Locale.ENGLISH);
+```
+## Sync vs Async
+Every function will have two ways to be called:
+* Synchronous (no callback at the end of the function)
+* Asynchronous (with a retrofit callback at the end)
+
+Example for the D3 Community API:
+```java
+// Synchronous
+public static CareerProfile getCareerProfile(@NonNull Context context, @NonNull Region region, @NonNull BattleTag battleTag, @NonNull Locale locale);
+
+// Asynchronous
+public static void getCareerProfile(@NonNull Context context, @NonNull Region region, @NonNull BattleTag battleTag, @NonNull Locale locale, @NonNull Callback<CareerProfile> callback);
+```
 
 # Configuration
 
 To set up your own API KEY and API SECRET, override the next values in your strings.xml:
 
-~~~~
+```xml
 <string name="api_key">YOUR-API-KEY-HERE</string>
 <string name="api_secret">YOUR-API-SECRETKEY-HERE</string>
-~~~~
+```
 
 # DEV STATUS
 

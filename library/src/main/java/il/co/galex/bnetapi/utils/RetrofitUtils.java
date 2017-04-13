@@ -43,7 +43,7 @@ public class RetrofitUtils {
                 HttpUrl originalHttpUrl = original.url();
 
                 HttpUrl url = originalHttpUrl.newBuilder()
-                        .addQueryParameter("apikey", context.getString(R.string.api_key))
+                        .addQueryParameter("apikey", context.getString(R.string.battlenet_lib_api_key))
                         .build();
 
                 Request.Builder requestBuilder = original.newBuilder()

@@ -31,16 +31,16 @@ import static junit.framework.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class D3CommunityAPITest {
 
-    private static final String AHAVA = "Ahava";
+    private static final String USERNAME = "Ahava";
     private static final int NUMBER = 2406;
-    private static final Long KESSEMO_HERO_ID = 89208127L;
+    private static final Long HERO_ID = 89208127L;
 
     @Test
     public void getCareerProfileSync() throws Exception {
 
         Context context = InstrumentationRegistry.getTargetContext();
 
-        BattleTag battleTag = new BattleTag(AHAVA, NUMBER);
+        BattleTag battleTag = new BattleTag(USERNAME, NUMBER);
         CareerProfile careerProfile = D3CommunityAPI.getCareerProfile(context, Region.EU, battleTag, Locale.ENGLISH);
         assertNotNull(careerProfile);
         assertTrue(battleTag.getPublicFormat().equals(careerProfile.getBattleTag()));
@@ -52,7 +52,7 @@ public class D3CommunityAPITest {
         final CountDownLatch lock = new CountDownLatch(1);
         final Context context = InstrumentationRegistry.getTargetContext();
 
-        final BattleTag battleTag = new BattleTag("Ahava", 2406);
+        final BattleTag battleTag = new BattleTag(USERNAME, NUMBER);
         final CareerProfile[] careerProfile = new CareerProfile[1];
 
         D3CommunityAPI.getCareerProfile(context, Region.EU, battleTag, Locale.ENGLISH, new Callback<CareerProfile>() {
@@ -81,10 +81,10 @@ public class D3CommunityAPITest {
 
         Context context = InstrumentationRegistry.getTargetContext();
 
-        BattleTag battleTag = new BattleTag(AHAVA, NUMBER);
-        HeroProfile heroProfile = D3CommunityAPI.getHeroProfile(context, Region.EU, battleTag, KESSEMO_HERO_ID, Locale.ENGLISH);
+        BattleTag battleTag = new BattleTag(USERNAME, NUMBER);
+        HeroProfile heroProfile = D3CommunityAPI.getHeroProfile(context, Region.EU, battleTag, HERO_ID, Locale.ENGLISH);
         assertNotNull(heroProfile);
-        //assertTrue(battleTag.getPublicFormat().equals(heroProfile()));
+        assertTrue(HERO_ID.equals(heroProfile.getId()));
     }
 
     @Test
@@ -93,10 +93,10 @@ public class D3CommunityAPITest {
         final CountDownLatch lock = new CountDownLatch(1);
         final Context context = InstrumentationRegistry.getTargetContext();
 
-        final BattleTag battleTag = new BattleTag("Ahava", 2406);
+        final BattleTag battleTag = new BattleTag(USERNAME, NUMBER);
         final HeroProfile[] heroProfiles = new HeroProfile[1];
 
-        D3CommunityAPI.getHeroProfile(context, Region.EU, battleTag, KESSEMO_HERO_ID, Locale.ENGLISH, new Callback<HeroProfile>() {
+        D3CommunityAPI.getHeroProfile(context, Region.EU, battleTag, HERO_ID, Locale.ENGLISH, new Callback<HeroProfile>() {
             @Override
             public void onResponse(Call<HeroProfile> call, Response<HeroProfile> response) {
 
@@ -114,6 +114,6 @@ public class D3CommunityAPITest {
         lock.await(2000, TimeUnit.MILLISECONDS);
 
         assertNotNull(heroProfiles[0]);
-        //assertTrue(battleTag.getPublicFormat().equals(heroProfiles[0].getBattleTag()));
+        assertTrue(HERO_ID.equals(heroProfiles[0].getId()));
     }
 }

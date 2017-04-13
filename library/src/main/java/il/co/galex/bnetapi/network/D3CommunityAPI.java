@@ -23,7 +23,11 @@ import retrofit2.Retrofit;
  *
  * @author Alexander Gherschon
  */
-public class D3CommunityAPI {
+public final class D3CommunityAPI {
+
+    private D3CommunityAPI() {
+
+    }
 
     /**
      * Get in a synchronous way the Career Profile for a BattleTag
