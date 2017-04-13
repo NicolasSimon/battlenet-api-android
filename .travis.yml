@@ -1,14 +1,15 @@
 language: android
-
-jdk:
-    - oraclejdk8
-
+jdk: oraclejdk8
 android:
   components:
     - build-tools-25.0.2
-    - android-25
     - extra
     - addon
+    - tools
+    - platform-tools
+    - android-25
+    - extra-android-m2repository
+    - android-22 # Android platform used by your alternative emulator
     - sys-img-armeabi-v7a-android-22
 before_script:
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
