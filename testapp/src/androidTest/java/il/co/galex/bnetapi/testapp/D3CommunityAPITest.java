@@ -10,12 +10,12 @@ import org.junit.runner.RunWith;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import il.co.galex.bnetapi.model.common.BattleTag;
-import il.co.galex.bnetapi.model.career.CareerProfile;
-import il.co.galex.bnetapi.model.hero.HeroProfile;
-import il.co.galex.bnetapi.model.common.Locale;
-import il.co.galex.bnetapi.model.common.Region;
-import il.co.galex.bnetapi.network.D3CommunityAPI;
+import il.co.galex.bnetapi.d3.model.common.BattleTag;
+import il.co.galex.bnetapi.d3.model.career.CareerProfile;
+import il.co.galex.bnetapi.d3.model.hero.HeroProfile;
+import il.co.galex.bnetapi.d3.model.common.Locale;
+import il.co.galex.bnetapi.d3.model.common.Region;
+import il.co.galex.bnetapi.d3.network.D3CommunityAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
