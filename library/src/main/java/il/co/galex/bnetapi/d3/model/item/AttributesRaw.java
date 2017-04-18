@@ -1,6 +1,6 @@
 package il.co.galex.bnetapi.d3.model.item;
 
-import com.google.gson.annotations.SerializedName;
+import java.util.HashMap;
 
 /**
  * @author Alexander Gherschon
@@ -8,9 +8,20 @@ import com.google.gson.annotations.SerializedName;
 
 public class AttributesRaw {
 
-    @SerializedName("Damage_Weapon_Min#Physical")
-    private IntRange damageWeaponMinPhysical;
+    private HashMap<String, FloatRange> values;
 
-    @SerializedName("Attacks_Per_Second_Item")
-    private FloatRange attacksPerSecondItem;
+    public HashMap<String, FloatRange> getValues() {
+        return values;
+    }
+
+    public void setValues(HashMap<String, FloatRange> values) {
+        this.values = values;
+    }
+
+    @Override
+    public String toString() {
+        return "AttributesRaw{" +
+                "values=" + values +
+                '}';
+    }
 }

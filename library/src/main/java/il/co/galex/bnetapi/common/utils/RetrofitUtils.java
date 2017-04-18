@@ -10,6 +10,7 @@ import java.io.IOException;
 import il.co.galex.bnetapi.BuildConfig;
 import il.co.galex.bnetapi.R;
 import il.co.galex.bnetapi.d3.model.common.Region;
+import il.co.galex.bnetapi.d3.model.item.AttributesRaw;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -75,6 +76,7 @@ public class RetrofitUtils {
     private static Gson getGson() {
 
         return new GsonBuilder()
+                .registerTypeAdapter(AttributesRaw.class, new AttributesRawTypeAdapter())
                 .create();
     }
 }

@@ -38,11 +38,15 @@ public final class D3IconsUtils {
     }
 
     public enum SkillsSize implements Size {
+
         SMALL("21"), MEDIUM("42"), LARGE("64");
+
+        private String value;
+
         SkillsSize(String value) {
             this.value = value;
         }
-        private String value;
+
         public String getValue() {
             return value;
         }

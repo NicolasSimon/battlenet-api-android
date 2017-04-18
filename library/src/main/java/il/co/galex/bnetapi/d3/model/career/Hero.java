@@ -27,9 +27,6 @@ public class Hero {
     @SerializedName("last-updated")
     private long lastUpdated;
 
-    public Hero() {
-    }
-
     public long getId() {
         return id;
     }
