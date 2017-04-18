@@ -15,6 +15,7 @@ import il.co.galex.bnetapi.d3.model.career.CareerProfile;
 import il.co.galex.bnetapi.d3.model.hero.HeroProfile;
 import il.co.galex.bnetapi.d3.model.common.Locale;
 import il.co.galex.bnetapi.d3.model.common.Region;
+import il.co.galex.bnetapi.d3.model.item.ItemData;
 import il.co.galex.bnetapi.d3.network.D3CommunityAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +35,7 @@ public class D3CommunityAPITest {
     private static final String USERNAME = "Ahava";
     private static final int NUMBER = 2406;
     private static final Long HERO_ID = 89208127L;
+    public static final String ITEM_ID = "Unique_Dagger_007_x1";
 
     @Test
     public void getCareerProfileSync() throws Exception {
@@ -115,5 +117,44 @@ public class D3CommunityAPITest {
 
         assertNotNull(heroProfiles[0]);
         assertTrue(HERO_ID.equals(heroProfiles[0].getId()));
+    }
+
+    @Test
+    public void getItemDataSync() throws Exception {
+
+        Context context = InstrumentationRegistry.getTargetContext();
+
+        ItemData itemData = D3CommunityAPI.getItemData(context, Region.EU, ITEM_ID, Locale.ENGLISH);
+        assertNotNull(itemData);
+        assertTrue(ITEM_ID.equals(itemData.getId()));
+    }
+
+    @Test
+    public void getItemDataAsync() throws Exception {
+
+        final CountDownLatch lock = new CountDownLatch(1);
+        final Context context = InstrumentationRegistry.getTargetContext();
+
+        final ItemData[] data = new ItemData[1];
+
+        D3CommunityAPI.getItemData(context, Region.EU, ITEM_ID, Locale.ENGLISH, new Callback<ItemData>() {
+            @Override
+            public void onResponse(Call<ItemData> call, Response<ItemData> response) {
+
+                data[0] = response.body();
+                lock.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<ItemData> call, Throwable t) {
+
+                lock.countDown();
+            }
+        });
+
+        lock.await(2000, TimeUnit.MILLISECONDS);
+
+        assertNotNull(data[0]);
+        assertTrue(ITEM_ID.equals(data[0].getId()));
     }
 }

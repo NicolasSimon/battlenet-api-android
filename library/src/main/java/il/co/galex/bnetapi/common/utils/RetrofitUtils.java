@@ -25,7 +25,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitUtils {
 
-    public static Retrofit getRetrofit(final Context context, Region region) {
+    private static Retrofit instance;
+
+    public static Retrofit getInstance(Context context, Region region) {
+
+        if(instance == null) {
+            instance = getRetrofit(context, region);
+        }
+
+        return instance;
+    }
+
+    private static Retrofit getRetrofit(final Context context, Region region) {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
