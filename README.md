@@ -1,6 +1,6 @@
 # Battle.net API for Android
 
-[![Build Status](https://travis-ci.org/galex/battlenet-api.svg?branch=master)](https://travis-ci.org/galex/battlenet-api) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/galex/battlenet-api-android.svg?branch=master)](https://travis-ci.org/galex/battlenet-api-android) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
                                                                                                                           
 # Introduction
 
