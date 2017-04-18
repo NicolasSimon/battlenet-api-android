@@ -6,8 +6,6 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
-import org.w3c.dom.Attr;
-
 import java.io.IOException;
 import java.util.HashMap;
 
