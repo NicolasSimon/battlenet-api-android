@@ -12,9 +12,10 @@ This library gives you access to the [APIs of Battle.net](https://dev.battle.net
 ### D3 Community API 
 
 #### PROFILE API
-
 - **CAREER PROFILE** /D3/PROFILE/:BATTLETAG/
 - **HERO PROFILE** /D3/PROFILE/:BATTLETAG/HERO/:ID
+#### DATA RESOURCES
+- **ITEM DATA** /D3/DATA/ITEM/:DATA
 
 # Library API
 
