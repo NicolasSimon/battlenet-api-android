@@ -2,6 +2,8 @@ package il.co.galex.bnetapi.d3.model.hero;
 
 import java.util.List;
 
+import il.co.galex.bnetapi.d3.model.common.TooltipParams;
+
 /**
  * @author Alexander Gherschon
  */
@@ -12,7 +14,7 @@ public class Item {
     private String name;
     private String icon;
     private String displayColor;
-    private String tooltipParams;
+    private TooltipParams tooltipParams;
     private TransmogItem transmogItem;
     private List<String> setItemsEquipped;
     private DyeColor dyeColor;
@@ -49,11 +51,11 @@ public class Item {
         this.displayColor = displayColor;
     }
 
-    public String getTooltipParams() {
+    public TooltipParams getTooltipParams() {
         return tooltipParams;
     }
 
-    public void setTooltipParams(String tooltipParams) {
+    public void setTooltipParams(TooltipParams tooltipParams) {
         this.tooltipParams = tooltipParams;
     }
 

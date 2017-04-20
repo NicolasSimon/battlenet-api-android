@@ -2,6 +2,8 @@ package il.co.galex.bnetapi.d3.model.item;
 
 import java.util.List;
 
+import il.co.galex.bnetapi.d3.model.common.TooltipParams;
+
 /**
  * @author Alexander Gherschon
  */
@@ -12,7 +14,7 @@ public class ItemData {
     private String name;
     private String icon;
     private String displayColor;
-    private String tooltipParams;
+    private TooltipParams tooltipParams;
     private Integer requiredLevel;
     private Integer itemLevel;
     private Integer stackSizemax;
@@ -69,11 +71,11 @@ public class ItemData {
         this.displayColor = displayColor;
     }
 
-    public String getTooltipParams() {
+    public TooltipParams getTooltipParams() {
         return tooltipParams;
     }
 
-    public void setTooltipParams(String tooltipParams) {
+    public void setTooltipParams(TooltipParams tooltipParams) {
         this.tooltipParams = tooltipParams;
     }
 

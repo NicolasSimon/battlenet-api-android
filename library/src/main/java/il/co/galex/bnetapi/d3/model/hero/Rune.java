@@ -1,5 +1,7 @@
 package il.co.galex.bnetapi.d3.model.hero;
 
+import il.co.galex.bnetapi.d3.model.common.TooltipParams;
+
 /**
  * @author Alexander Gherschon
  */
@@ -12,7 +14,7 @@ public class Rune {
     private int level;
     private String description;
     private String simpleDescription;
-    private String tooltipParams;
+    private TooltipParams tooltipParams;
     private String skillCalcId;
     private int order;
 
@@ -64,11 +66,11 @@ public class Rune {
         this.simpleDescription = simpleDescription;
     }
 
-    public String getTooltipParams() {
+    public TooltipParams getTooltipParams() {
         return tooltipParams;
     }
 
-    public void setTooltipParams(String tooltipParams) {
+    public void setTooltipParams(TooltipParams tooltipParams) {
         this.tooltipParams = tooltipParams;
     }
 

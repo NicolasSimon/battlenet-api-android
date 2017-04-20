@@ -10,6 +10,7 @@ import java.io.IOException;
 import il.co.galex.bnetapi.BuildConfig;
 import il.co.galex.bnetapi.R;
 import il.co.galex.bnetapi.d3.model.common.Region;
+import il.co.galex.bnetapi.d3.model.common.TooltipParams;
 import il.co.galex.bnetapi.d3.model.item.AttributesRaw;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -77,6 +78,7 @@ public class RetrofitUtils {
 
         return new GsonBuilder()
                 .registerTypeAdapter(AttributesRaw.class, new AttributesRawTypeAdapter())
+                .registerTypeAdapter(TooltipParams.class, new TooltipParamsTypeAdapter())
                 .create();
     }
 }
