@@ -2,10 +2,12 @@ package il.co.galex.battlenet.api.utils;
 
 import android.content.Context;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.text.DateFormat;
 
 import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 import il.co.galex.bnetapi.BuildConfig;
@@ -50,22 +52,19 @@ public class RetrofitUtils {
             httpClient.addInterceptor(logging);
         }
 
-        httpClient.addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request original = chain.request();
-                HttpUrl originalHttpUrl = original.url();
+        httpClient.addInterceptor(chain -> {
+            Request original = chain.request();
+            HttpUrl originalHttpUrl = original.url();
 
-                HttpUrl url = originalHttpUrl.newBuilder()
-                        .addQueryParameter("apikey", context.getString(R.string.battlenet_lib_api_key))
-                        .build();
+            HttpUrl url = originalHttpUrl.newBuilder()
+                    .addQueryParameter("apikey", context.getString(R.string.battlenet_lib_api_key))
+                    .build();
 
-                Request.Builder requestBuilder = original.newBuilder()
-                        .url(url);
+            Request.Builder requestBuilder = original.newBuilder()
+                    .url(url);
 
-                Request request = requestBuilder.build();
-                return chain.proceed(request);
-            }
+            Request request = requestBuilder.build();
+            return chain.proceed(request);
         });
 
         return new Retrofit.Builder()
@@ -78,6 +77,8 @@ public class RetrofitUtils {
     private static Gson getGson() {
 
         return new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz")
                 .registerTypeAdapter(BattleTag.class, new BattleTagTypeAdapter())
                 .registerTypeAdapter(AttributesRaw.class, new AttributesRawTypeAdapter())
                 .registerTypeAdapter(TooltipParams.class, new TooltipParamsTypeAdapter())
