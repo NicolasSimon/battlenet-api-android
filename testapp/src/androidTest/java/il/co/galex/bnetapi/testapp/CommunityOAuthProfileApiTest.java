@@ -29,7 +29,7 @@ import static junit.framework.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class CommunityOAuthProfileApiTest {
 
-    private static final String ACCESS_TOKEN = "bp7vsdqk5kybzy2sguaj29qs"; // TOD request token while test run
+    private static final String ACCESS_TOKEN = "8hd2uz9q7f5khbphvu3vu4yh"; // problematic cause the code expires after 30 days
 
     private static final BattleTag BATTLE_TAG = new BattleTag("Ahava", 2406);
 
