@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import il.co.galex.battlenet.api.d3.model.account.User;
 import il.co.galex.battlenet.api.d3.model.common.Region;
-import il.co.galex.battlenet.api.d3.model.item.ItemData;
 import il.co.galex.battlenet.api.utils.RetrofitUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
