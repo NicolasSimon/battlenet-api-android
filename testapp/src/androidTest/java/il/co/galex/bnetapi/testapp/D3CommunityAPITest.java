@@ -32,8 +32,8 @@ import static junit.framework.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class D3CommunityAPITest {
 
-    private static final String USERNAME = "Ahava";
-    private static final int NUMBER = 2406;
+    private final BattleTag BATTLETAG = new BattleTag("Ahava", 2406);
+
     private static final Long HERO_ID = 89208127L;
     private static final String ITEM_ID = "Unique_Dagger_007_x1";
 
@@ -42,10 +42,9 @@ public class D3CommunityAPITest {
 
         Context context = InstrumentationRegistry.getTargetContext();
 
-        BattleTag battleTag = new BattleTag(USERNAME, NUMBER);
-        CareerProfile careerProfile = D3CommunityAPI.getCareerProfile(context, Region.EU, battleTag, Locale.ENGLISH);
+        CareerProfile careerProfile = D3CommunityAPI.getCareerProfile(context, Region.EU, BATTLETAG, Locale.ENGLISH);
         assertNotNull(careerProfile);
-        assertTrue(battleTag.getPublicFormat().equals(careerProfile.getBattleTag()));
+        assertTrue(BATTLETAG.equals(careerProfile.getBattleTag()));
     }
 
     @Test
@@ -54,10 +53,10 @@ public class D3CommunityAPITest {
         final CountDownLatch lock = new CountDownLatch(1);
         final Context context = InstrumentationRegistry.getTargetContext();
 
-        final BattleTag battleTag = new BattleTag(USERNAME, NUMBER);
+
         final CareerProfile[] careerProfile = new CareerProfile[1];
 
-        D3CommunityAPI.getCareerProfile(context, Region.EU, battleTag, Locale.ENGLISH, new Callback<CareerProfile>() {
+        D3CommunityAPI.getCareerProfile(context, Region.EU, BATTLETAG, Locale.ENGLISH, new Callback<CareerProfile>() {
             @Override
             public void onResponse(Call<CareerProfile> call, Response<CareerProfile> response) {
 
@@ -75,7 +74,7 @@ public class D3CommunityAPITest {
         lock.await(2000, TimeUnit.MILLISECONDS);
 
         assertNotNull(careerProfile[0]);
-        assertTrue(battleTag.getPublicFormat().equals(careerProfile[0].getBattleTag()));
+        assertTrue(BATTLETAG.equals(careerProfile[0].getBattleTag()));
     }
 
     @Test
@@ -83,8 +82,7 @@ public class D3CommunityAPITest {
 
         Context context = InstrumentationRegistry.getTargetContext();
 
-        BattleTag battleTag = new BattleTag(USERNAME, NUMBER);
-        HeroProfile heroProfile = D3CommunityAPI.getHeroProfile(context, Region.EU, battleTag, HERO_ID, Locale.ENGLISH);
+        HeroProfile heroProfile = D3CommunityAPI.getHeroProfile(context, Region.EU, BATTLETAG, HERO_ID, Locale.ENGLISH);
         assertNotNull(heroProfile);
         assertTrue(HERO_ID.equals(heroProfile.getId()));
     }
@@ -95,10 +93,9 @@ public class D3CommunityAPITest {
         final CountDownLatch lock = new CountDownLatch(1);
         final Context context = InstrumentationRegistry.getTargetContext();
 
-        final BattleTag battleTag = new BattleTag(USERNAME, NUMBER);
         final HeroProfile[] heroProfiles = new HeroProfile[1];
 
-        D3CommunityAPI.getHeroProfile(context, Region.EU, battleTag, HERO_ID, Locale.ENGLISH, new Callback<HeroProfile>() {
+        D3CommunityAPI.getHeroProfile(context, Region.EU, BATTLETAG, HERO_ID, Locale.ENGLISH, new Callback<HeroProfile>() {
             @Override
             public void onResponse(Call<HeroProfile> call, Response<HeroProfile> response) {
 
