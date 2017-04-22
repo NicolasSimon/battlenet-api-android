@@ -6,20 +6,16 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
-import java.text.DateFormat;
-
 import il.co.galex.battlenet.api.d3.model.common.BattleTag;
-import il.co.galex.bnetapi.BuildConfig;
-import il.co.galex.bnetapi.R;
+import il.co.galex.battlenet.api.d3.model.common.HeroClass;
 import il.co.galex.battlenet.api.d3.model.common.Region;
 import il.co.galex.battlenet.api.d3.model.common.TooltipParams;
 import il.co.galex.battlenet.api.d3.model.item.AttributesRaw;
+import il.co.galex.bnetapi.BuildConfig;
+import il.co.galex.bnetapi.R;
 import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -80,6 +76,7 @@ public class RetrofitUtils {
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz")
                 .registerTypeAdapter(BattleTag.class, new BattleTagTypeAdapter())
+                .registerTypeAdapter(HeroClass.class, new HeroClassTypeAdapter())
                 .registerTypeAdapter(AttributesRaw.class, new AttributesRawTypeAdapter())
                 .registerTypeAdapter(TooltipParams.class, new TooltipParamsTypeAdapter())
                 .create();
