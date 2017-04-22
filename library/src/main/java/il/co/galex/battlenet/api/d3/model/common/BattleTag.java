@@ -17,6 +17,9 @@ public class BattleTag {
         this.number = Integer.parseInt(publicBattleTag.substring(i + 1, publicBattleTag.length()));
     }
 
+    public BattleTag() {
+    }
+
     public BattleTag(String name, int number) {
         this.name = name;
         this.number = number;
@@ -30,6 +33,14 @@ public class BattleTag {
         this.number = number;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getApiFormat() {
 
         return name + "-" + number;
@@ -40,6 +51,8 @@ public class BattleTag {
         return name + "#" + number;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,9 +60,7 @@ public class BattleTag {
 
         BattleTag battleTag = (BattleTag) o;
 
-        if (number != battleTag.number) return false;
-        return name.equals(battleTag.name);
-
+        return number == battleTag.number && name.equals(battleTag.name);
     }
 
     @Override

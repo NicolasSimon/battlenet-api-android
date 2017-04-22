@@ -3,6 +3,7 @@ package il.co.galex.battlenet.api.d3.model.career;
 import java.util.HashMap;
 import java.util.List;
 
+import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 import il.co.galex.battlenet.api.d3.model.common.HeroClass;
 import il.co.galex.battlenet.api.d3.model.common.Mob;
 
@@ -12,7 +13,7 @@ import il.co.galex.battlenet.api.d3.model.common.Mob;
 
 public class CareerProfile {
 
-    private String battleTag;
+    private BattleTag battleTag;
     private long paragonLevel;
     private long paragonLevelHardcore;
     private long paragonLevelSeason;
@@ -34,11 +35,11 @@ public class CareerProfile {
     private Artisan mysticHardcore;
     private HashMap<String, SeasonProfile> seasonalProfiles;
 
-    public String getBattleTag() {
+    public BattleTag getBattleTag() {
         return battleTag;
     }
 
-    public void setBattleTag(String battleTag) {
+    public void setBattleTag(BattleTag battleTag) {
         this.battleTag = battleTag;
     }
 

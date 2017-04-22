@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
+import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 import il.co.galex.bnetapi.BuildConfig;
 import il.co.galex.bnetapi.R;
 import il.co.galex.battlenet.api.d3.model.common.Region;
@@ -77,6 +78,7 @@ public class RetrofitUtils {
     private static Gson getGson() {
 
         return new GsonBuilder()
+                .registerTypeAdapter(BattleTag.class, new BattleTagTypeAdapter())
                 .registerTypeAdapter(AttributesRaw.class, new AttributesRawTypeAdapter())
                 .registerTypeAdapter(TooltipParams.class, new TooltipParamsTypeAdapter())
                 .create();
