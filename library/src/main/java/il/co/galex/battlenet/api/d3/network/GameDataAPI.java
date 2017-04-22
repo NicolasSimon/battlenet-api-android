@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import il.co.galex.battlenet.api.d3.model.account.User;
 import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
 import il.co.galex.battlenet.api.utils.RetrofitUtils;
 import retrofit2.Call;
@@ -14,6 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -51,9 +53,37 @@ public final class GameDataAPI {
         call.enqueue(callback);
     }
 
+    public static Season getSeason(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId, @NonNull String accessToken) {
+
+        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        GameDataService service = retrofit.create(GameDataService.class);
+
+        Call<Season> call = service.getSeason(seasonId, accessToken);
+
+        try {
+            Response<Season> response = call.execute();
+            if (response.code() == 200) return response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void getSeason(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId, @NonNull String accessToken, Callback<Season> callback) {
+
+        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        GameDataService service = retrofit.create(GameDataService.class);
+
+        Call<Season> call = service.getSeason(seasonId, accessToken);
+        call.enqueue(callback);
+    }
+
     private interface GameDataService {
 
         @GET("/data/d3/season/")
         Call<SeasonIndex> getSeasonIndex(@Query("access_token") String accessToken);
+
+        @GET("/data/d3/season/{seasonId}")
+        Call<Season> getSeason(@Path("seasonId") Integer seasonId, @Query("access_token") String accessToken);
     }
 }

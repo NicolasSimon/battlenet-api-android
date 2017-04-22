@@ -14,7 +14,6 @@ public class Season {
     @SerializedName("_links")
     private Links links;
     private List<Leaderboard> leaderboard;
-
     private Integer seasonId;
     private Date lastUpdateTime;
     private String generatedBy;
