@@ -2,7 +2,7 @@ package il.co.galex.bnetapi.testapp;
 
 import org.junit.Test;
 
-import il.co.galex.bnetapi.d3.utils.D3IconsUtils;
+import il.co.galex.battlenet.api.d3.utils.D3IconsUtils;
 
 import static org.junit.Assert.*;
 
