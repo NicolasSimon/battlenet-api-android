@@ -51,8 +51,6 @@ public class BattleTag {
         return name + "#" + number;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,5 +66,13 @@ public class BattleTag {
         int result = name.hashCode();
         result = 31 * result + number;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", number=" + number +
+                '}';
     }
 }

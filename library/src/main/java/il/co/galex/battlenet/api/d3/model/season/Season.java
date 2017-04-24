@@ -13,9 +13,16 @@ public class Season {
 
     @SerializedName("_links")
     private Links links;
+
     private List<Leaderboard> leaderboard;
+
+    @SerializedName("season_id")
     private Integer seasonId;
+
+    @SerializedName("last-update-time")
     private Date lastUpdateTime;
+
+    @SerializedName("generated_by")
     private String generatedBy;
 
     public Links getLinks() {

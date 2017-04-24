@@ -11,10 +11,19 @@ import java.util.List;
 
 public class SeasonIndex {
 
+    @SerializedName("current_season")
     private Integer currentSeason;
+
+    @SerializedName("service_current_season")
     private Integer serviceCurrentSeason;
+
+    @SerializedName("service_season_state")
     private SeasonState serviceSeasonState;
+
+    @SerializedName("last-update-time")
     private Date lastUpdateTime;
+
+    @SerializedName("generated_by")
     private String generatedBy;
 
     @SerializedName("_links")

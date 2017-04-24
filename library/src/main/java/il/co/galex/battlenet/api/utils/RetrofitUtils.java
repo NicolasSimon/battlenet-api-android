@@ -73,7 +73,6 @@ public class RetrofitUtils {
     private static Gson getGson() {
 
         return new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz")
                 .registerTypeAdapter(BattleTag.class, new BattleTagTypeAdapter())
                 .registerTypeAdapter(HeroClass.class, new HeroClassTypeAdapter())

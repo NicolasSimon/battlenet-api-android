@@ -31,8 +31,12 @@ public class HeroClassTypeAdapter extends TypeAdapter<HeroClass> {
         }
         // not found, use the cases we know of from the Season API
         switch (value) {
-            case "wd": return HeroClass.WITCH_DOCTOR;
-            case "dh": return HeroClass.DEMON_HUNTER;
+            case "witch-doctor":
+            case "wd":
+                return HeroClass.WITCH_DOCTOR;
+            case "demon-hunter":
+            case "dh":
+                return HeroClass.DEMON_HUNTER;
         }
         // not one of those cases, we capitulate
         return null;
