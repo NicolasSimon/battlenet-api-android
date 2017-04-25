@@ -2,7 +2,6 @@ package il.co.galex.battlenet.api.utils;
 
 import android.content.Context;
 
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

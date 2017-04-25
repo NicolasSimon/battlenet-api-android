@@ -8,19 +8,15 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import il.co.galex.battlenet.api.d3.model.account.User;
-import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 import il.co.galex.battlenet.api.d3.model.common.Region;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
-import il.co.galex.battlenet.api.d3.network.CommunityOAuthProfileAPI;
 import il.co.galex.battlenet.api.d3.network.GameDataAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 
 /**
  * @author Alexander Gherschon

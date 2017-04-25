@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 
 import java.io.IOException;
 
-import il.co.galex.battlenet.api.d3.model.account.User;
 import il.co.galex.battlenet.api.d3.model.common.Region;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
