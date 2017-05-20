@@ -8,19 +8,16 @@ import android.support.annotation.WorkerThread;
 import java.io.IOException;
 
 import il.co.galex.battlenet.api.d3.model.career.CareerProfile;
-import il.co.galex.battlenet.api.d3.model.hero.HeroProfile;
+import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 import il.co.galex.battlenet.api.d3.model.common.Locale;
 import il.co.galex.battlenet.api.d3.model.common.Region;
-import il.co.galex.battlenet.api.d3.model.common.BattleTag;
-import il.co.galex.battlenet.api.utils.RetrofitUtils;
+import il.co.galex.battlenet.api.d3.model.hero.HeroProfile;
 import il.co.galex.battlenet.api.d3.model.item.ItemData;
+import il.co.galex.battlenet.api.utils.RetrofitUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * Diablo 3 Community API
@@ -171,18 +168,6 @@ public final class D3CommunityAPI {
 
         Call<ItemData> call = service.getItemData(itemId, locale.getValue());
         call.enqueue(callback);
-    }
-
-    private interface D3CommunityService {
-
-        @GET("d3/profile/{battleTag}/")
-        Call<CareerProfile> getCareerProfile(@Path("battleTag") String battleTag, @Query("locale") String locale);
-
-        @GET("d3/profile/{battleTag}/hero/{heroId}")
-        Call<HeroProfile> getHeroProfile(@Path("battleTag") String battleTag, @Path("heroId") Long heroId, @Query("locale") String locale);
-
-        @GET("d3/data/item/{itemId}")
-        Call<ItemData> getItemData(@Path("itemId") String itemId, @Query("locale") String locale);
     }
 }
 

@@ -23,19 +23,6 @@ public class HeroClassTypeAdapter extends TypeAdapter<HeroClass> {
     public HeroClass read(JsonReader in) throws IOException {
 
         String value = in.nextString();
-        for (HeroClass heroClass : HeroClass.values()) {
-            if(heroClass.name().equalsIgnoreCase(value)) return heroClass;
-        }
-        // not found, use the cases we know of from the Season API
-        switch (value) {
-            case "witch-doctor":
-            case "wd":
-                return HeroClass.WITCH_DOCTOR;
-            case "demon-hunter":
-            case "dh":
-                return HeroClass.DEMON_HUNTER;
-            default:
-                return null;
-        }
+        return HeroClass.get(value);
     }
 }

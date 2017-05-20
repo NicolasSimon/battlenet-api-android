@@ -12,8 +12,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 /**
  * @author Alexander Gherschon
@@ -48,11 +46,5 @@ public final class CommunityOAuthProfileAPI {
 
         Call<User> call = service.getUser(accessToken);
         call.enqueue(callback);
-    }
-
-    private interface CommunityOAuthProfileService {
-
-        @GET("/account/user")
-        Call<User> getUser(@Query("access_token") String accessToken);
     }
 }

@@ -10,6 +10,8 @@ import il.co.galex.battlenet.api.d3.model.common.HeroClass;
 import il.co.galex.battlenet.api.d3.model.common.Region;
 import il.co.galex.battlenet.api.d3.model.common.TooltipParams;
 import il.co.galex.battlenet.api.d3.model.item.AttributesRaw;
+import il.co.galex.battlenet.api.d3.model.season.PlayerData;
+import il.co.galex.battlenet.api.d3.model.season.RowData;
 import il.co.galex.bnetapi.BuildConfig;
 import il.co.galex.bnetapi.R;
 import okhttp3.HttpUrl;
@@ -23,9 +25,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author Alexander Gherschon
  */
 
-public class RetrofitUtils {
+public final class RetrofitUtils {
 
     private static Retrofit instance;
+
+    private RetrofitUtils() {
+
+    }
 
     public static Retrofit getInstance(Context context, Region region) {
 
@@ -77,6 +83,8 @@ public class RetrofitUtils {
                 .registerTypeAdapter(HeroClass.class, new HeroClassTypeAdapter())
                 .registerTypeAdapter(AttributesRaw.class, new AttributesRawTypeAdapter())
                 .registerTypeAdapter(TooltipParams.class, new TooltipParamsTypeAdapter())
+                .registerTypeAdapter(PlayerData.class, new PlayerDataTypeAdapter())
+                .registerTypeAdapter(RowData.class, new RowDataTypeAdapter())
                 .create();
     }
 }

@@ -9,8 +9,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.api.d3.model.leaderboard.Leaderboard;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
+import il.co.galex.battlenet.api.d3.model.season.SeasonLeaderboard;
 import il.co.galex.battlenet.api.d3.network.GameDataAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +26,7 @@ import static junit.framework.Assert.assertNotNull;
 
 public class GameDataAPITest {
 
-    private static final String ACCESS_TOKEN = "8hd2uz9q7f5khbphvu3vu4yh"; // problematic cause the code expires after 30 days
+    private static final String ACCESS_TOKEN = "nestn9uhfgzpj953j3xpfpnw"; // problematic because the token expires after 30 days
 
     @Test
     public void getSeasonIndexSync() throws Exception {
@@ -102,5 +104,45 @@ public class GameDataAPITest {
 
         assertNotNull(data[0]);
         assertNotNull(data[0].getSeasonId());
+    }
+
+
+    @Test
+    public void getSeasonLeaderboardSync() throws Exception {
+
+        Context context = InstrumentationRegistry.getTargetContext();
+
+        SeasonLeaderboard data = GameDataAPI.getSeasonLeaderboard(context, Region.EU, 10, Leaderboard.ACHIEVEMENT_POINTS, ACCESS_TOKEN);
+        assertNotNull(data);
+        assertNotNull(data.getSeason());
+    }
+
+    @Test
+    public void getSeasonLeaderboardAsync() throws Exception {
+
+        final CountDownLatch lock = new CountDownLatch(1);
+        final Context context = InstrumentationRegistry.getTargetContext();
+
+        final SeasonLeaderboard[] data = new SeasonLeaderboard[1];
+
+        GameDataAPI.getSeasonLeaderboard(context, Region.EU, 9, Leaderboard.ACHIEVEMENT_POINTS, ACCESS_TOKEN, new Callback<SeasonLeaderboard>() {
+            @Override
+            public void onResponse(Call<SeasonLeaderboard> call, Response<SeasonLeaderboard> response) {
+
+                data[0] = response.body();
+                lock.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<SeasonLeaderboard> call, Throwable t) {
+
+                lock.countDown();
+            }
+        });
+
+        lock.await(2000, TimeUnit.MILLISECONDS);
+
+        assertNotNull(data[0]);
+        assertNotNull(data[0].getSeason());
     }
 }

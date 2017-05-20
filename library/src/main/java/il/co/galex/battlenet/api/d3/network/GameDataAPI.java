@@ -6,16 +6,15 @@ import android.support.annotation.NonNull;
 import java.io.IOException;
 
 import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.api.d3.model.leaderboard.Leaderboard;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
+import il.co.galex.battlenet.api.d3.model.season.SeasonLeaderboard;
 import il.co.galex.battlenet.api.utils.RetrofitUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * @author Alexander Gherschon
@@ -77,12 +76,28 @@ public final class GameDataAPI {
         call.enqueue(callback);
     }
 
-    private interface GameDataService {
+    public static SeasonLeaderboard getSeasonLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId, @NonNull Leaderboard leaderboard, @NonNull String accessToken) {
 
-        @GET("/data/d3/season/")
-        Call<SeasonIndex> getSeasonIndex(@Query("access_token") String accessToken);
+        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        GameDataService service = retrofit.create(GameDataService.class);
 
-        @GET("/data/d3/season/{seasonId}")
-        Call<Season> getSeason(@Path("seasonId") Integer seasonId, @Query("access_token") String accessToken);
+        Call<SeasonLeaderboard> call = service.getSeasonLeaderboard(seasonId, leaderboard.getValue(), accessToken);
+
+        try {
+            Response<SeasonLeaderboard> response = call.execute();
+            if (response.code() == 200) return response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void getSeasonLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId,  @NonNull Leaderboard leaderboard, @NonNull String accessToken, Callback<SeasonLeaderboard> callback) {
+
+        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        GameDataService service = retrofit.create(GameDataService.class);
+
+        Call<SeasonLeaderboard> call = service.getSeasonLeaderboard(seasonId, leaderboard.getValue(), accessToken);
+        call.enqueue(callback);
     }
 }

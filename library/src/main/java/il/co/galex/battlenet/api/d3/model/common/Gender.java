@@ -1,5 +1,7 @@
 package il.co.galex.battlenet.api.d3.model.common;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -13,5 +15,13 @@ public enum Gender {
     MALE,
 
     @SerializedName("1")
-    FEMALE
+    FEMALE;
+
+
+    public static Gender get(@NonNull String letter) {
+
+        if("m".equalsIgnoreCase(letter)) return MALE;
+        else if("f".equalsIgnoreCase(letter)) return FEMALE;
+        else return null;
+    }
 }

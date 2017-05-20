@@ -6,12 +6,13 @@ package il.co.galex.battlenet.api.d3.model.common;
 
 public class BattleTag {
 
+    public static final String PUBLIC_SEPARATOR = "#";
     private String name;
     private int number;
 
     public BattleTag(String publicBattleTag) {
 
-        int i = publicBattleTag.indexOf("#");
+        int i = publicBattleTag.indexOf(PUBLIC_SEPARATOR);
 
         this.name = publicBattleTag.substring(0, i);
         this.number = Integer.parseInt(publicBattleTag.substring(i + 1, publicBattleTag.length()));
@@ -48,7 +49,7 @@ public class BattleTag {
 
     public String getPublicFormat() {
 
-        return name + "#" + number;
+        return name + PUBLIC_SEPARATOR + number;
     }
 
     @Override
