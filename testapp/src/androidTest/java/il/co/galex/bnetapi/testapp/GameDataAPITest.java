@@ -9,8 +9,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.api.d3.model.era.Era;
 import il.co.galex.battlenet.api.d3.model.era.EraIndex;
-import il.co.galex.battlenet.api.d3.model.leaderboard.Leaderboard;
+import il.co.galex.battlenet.api.d3.model.leaderboard.LeaderboardType;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
 import il.co.galex.battlenet.api.d3.model.season.SeasonLeaderboard;
@@ -113,7 +114,7 @@ public class GameDataAPITest {
 
         Context context = InstrumentationRegistry.getTargetContext();
 
-        SeasonLeaderboard data = GameDataAPI.getSeasonLeaderboard(context, Region.EU, 10, Leaderboard.ACHIEVEMENT_POINTS, ACCESS_TOKEN);
+        SeasonLeaderboard data = GameDataAPI.getSeasonLeaderboard(context, Region.EU, 10, LeaderboardType.ACHIEVEMENT_POINTS, ACCESS_TOKEN);
         assertNotNull(data);
         assertNotNull(data.getSeason());
     }
@@ -126,7 +127,7 @@ public class GameDataAPITest {
 
         final SeasonLeaderboard[] data = new SeasonLeaderboard[1];
 
-        GameDataAPI.getSeasonLeaderboard(context, Region.EU, 9, Leaderboard.ACHIEVEMENT_POINTS, ACCESS_TOKEN, new Callback<SeasonLeaderboard>() {
+        GameDataAPI.getSeasonLeaderboard(context, Region.EU, 9, LeaderboardType.ACHIEVEMENT_POINTS, ACCESS_TOKEN, new Callback<SeasonLeaderboard>() {
             @Override
             public void onResponse(Call<SeasonLeaderboard> call, Response<SeasonLeaderboard> response) {
 
@@ -184,5 +185,44 @@ public class GameDataAPITest {
 
         assertNotNull(data[0]);
         assertNotNull(data[0].getCurrentEra());
+    }
+
+    @Test
+    public void getEraSync() throws Exception {
+
+        Context context = InstrumentationRegistry.getTargetContext();
+
+        Era data = GameDataAPI.getEra(context, Region.EU, 6, ACCESS_TOKEN);
+        assertNotNull(data);
+        assertNotNull(data.getEraId());
+    }
+
+    @Test
+    public void getEraAsync() throws Exception {
+
+        final CountDownLatch lock = new CountDownLatch(1);
+        final Context context = InstrumentationRegistry.getTargetContext();
+
+        final Era[] data = new Era[1];
+
+        GameDataAPI.getEra(context, Region.EU, 7, ACCESS_TOKEN, new Callback<Era>() {
+            @Override
+            public void onResponse(Call<Era> call, Response<Era> response) {
+
+                data[0] = response.body();
+                lock.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<Era> call, Throwable t) {
+
+                lock.countDown();
+            }
+        });
+
+        lock.await(2000, TimeUnit.MILLISECONDS);
+
+        assertNotNull(data[0]);
+        assertNotNull(data[0].getEraId());
     }
 }

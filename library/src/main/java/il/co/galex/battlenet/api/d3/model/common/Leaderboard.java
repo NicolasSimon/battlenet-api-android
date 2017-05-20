@@ -1,8 +1,6 @@
-package il.co.galex.battlenet.api.d3.model.season;
+package il.co.galex.battlenet.api.d3.model.common;
 
 import com.google.gson.annotations.SerializedName;
-
-import il.co.galex.battlenet.api.d3.model.common.HeroClass;
 
 /**
  * @author Alexander Gherschon

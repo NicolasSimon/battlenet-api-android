@@ -6,8 +6,9 @@ import android.support.annotation.NonNull;
 import java.io.IOException;
 
 import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.api.d3.model.era.Era;
 import il.co.galex.battlenet.api.d3.model.era.EraIndex;
-import il.co.galex.battlenet.api.d3.model.leaderboard.Leaderboard;
+import il.co.galex.battlenet.api.d3.model.leaderboard.LeaderboardType;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
 import il.co.galex.battlenet.api.d3.model.season.SeasonLeaderboard;
@@ -77,12 +78,12 @@ public final class GameDataAPI {
         call.enqueue(callback);
     }
 
-    public static SeasonLeaderboard getSeasonLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId, @NonNull Leaderboard leaderboard, @NonNull String accessToken) {
+    public static SeasonLeaderboard getSeasonLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId, @NonNull LeaderboardType leaderboardType, @NonNull String accessToken) {
 
         Retrofit retrofit = RetrofitUtils.getInstance(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
-        Call<SeasonLeaderboard> call = service.getSeasonLeaderboard(seasonId, leaderboard.getValue(), accessToken);
+        Call<SeasonLeaderboard> call = service.getSeasonLeaderboard(seasonId, leaderboardType.getValue(), accessToken);
 
         try {
             Response<SeasonLeaderboard> response = call.execute();
@@ -93,12 +94,12 @@ public final class GameDataAPI {
         return null;
     }
 
-    public static void getSeasonLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId,  @NonNull Leaderboard leaderboard, @NonNull String accessToken, Callback<SeasonLeaderboard> callback) {
+    public static void getSeasonLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId, @NonNull LeaderboardType leaderboardType, @NonNull String accessToken, Callback<SeasonLeaderboard> callback) {
 
         Retrofit retrofit = RetrofitUtils.getInstance(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
-        Call<SeasonLeaderboard> call = service.getSeasonLeaderboard(seasonId, leaderboard.getValue(), accessToken);
+        Call<SeasonLeaderboard> call = service.getSeasonLeaderboard(seasonId, leaderboardType.getValue(), accessToken);
         call.enqueue(callback);
     }
 
@@ -124,6 +125,31 @@ public final class GameDataAPI {
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<EraIndex> call = service.getEraIndex(accessToken);
+        call.enqueue(callback);
+    }
+
+    public static Era getEra(@NonNull Context context, @NonNull Region region, @NonNull Integer eraId, @NonNull String accessToken) {
+
+        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        GameDataService service = retrofit.create(GameDataService.class);
+
+        Call<Era> call = service.getEra(eraId, accessToken);
+
+        try {
+            Response<Era> response = call.execute();
+            if (response.code() == 200) return response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void getEra(@NonNull Context context, @NonNull Region region, @NonNull Integer eraId, @NonNull String accessToken, Callback<Era> callback) {
+
+        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        GameDataService service = retrofit.create(GameDataService.class);
+
+        Call<Era> call = service.getEra(eraId, accessToken);
         call.enqueue(callback);
     }
 }

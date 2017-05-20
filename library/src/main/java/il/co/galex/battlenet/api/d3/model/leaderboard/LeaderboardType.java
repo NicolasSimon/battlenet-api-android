@@ -4,7 +4,7 @@ package il.co.galex.battlenet.api.d3.model.leaderboard;
  * @author Alexander Gherschon
  */
 
-public enum Leaderboard {
+public enum LeaderboardType {
 
     ACHIEVEMENT_POINTS("achievement-points"),
     RIFT_HARDCORE_BARBARIAN("rift-hardcore-barbarian"),
@@ -28,7 +28,7 @@ public enum Leaderboard {
 
     private String value;
 
-    Leaderboard(String value) {
+    LeaderboardType(String value) {
         this.value = value;
     }
 

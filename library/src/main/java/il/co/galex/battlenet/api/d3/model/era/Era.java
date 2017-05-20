@@ -1,4 +1,4 @@
-package il.co.galex.battlenet.api.d3.model.season;
+package il.co.galex.battlenet.api.d3.model.era;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -12,15 +12,15 @@ import il.co.galex.battlenet.api.d3.model.common.Links;
  * @author Alexander Gherschon
  */
 
-public class Season {
+public class Era {
 
     @SerializedName("_links")
     private Links links;
 
     private List<Leaderboard> leaderboard;
 
-    @SerializedName("season_id")
-    private Integer seasonId;
+    @SerializedName("era_id")
+    private Integer eraId;
 
     @SerializedName("last-update-time")
     private Date lastUpdateTime;
@@ -44,12 +44,12 @@ public class Season {
         this.leaderboard = leaderboard;
     }
 
-    public Integer getSeasonId() {
-        return seasonId;
+    public Integer getEraId() {
+        return eraId;
     }
 
-    public void setSeasonId(Integer seasonId) {
-        this.seasonId = seasonId;
+    public void setEraId(Integer eraId) {
+        this.eraId = eraId;
     }
 
     public Date getLastUpdateTime() {
@@ -73,7 +73,7 @@ public class Season {
         return "{" +
                 "links=" + links +
                 ", leaderboard=" + leaderboard +
-                ", seasonId=" + seasonId +
+                ", eraId=" + eraId +
                 ", lastUpdateTime=" + lastUpdateTime +
                 ", generatedBy='" + generatedBy + '\'' +
                 '}';
