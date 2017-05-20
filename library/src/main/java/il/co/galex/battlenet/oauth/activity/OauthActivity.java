@@ -2,7 +2,6 @@ package il.co.galex.battlenet.oauth.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -23,19 +22,18 @@ import il.co.galex.battlenet.oauth.utils.OauthSharedPreferences;
 import il.co.galex.battlenet.oauth.utils.UrlUtils;
 import il.co.galex.bnetapi.R;
 
-import static il.co.galex.battlenet.oauth.utils.Constants.ACTIVITY_RESULT_ERROR;
-
 public class OauthActivity extends AppCompatActivity {
 
-    private static final String REDIRECT_URI = "https://localhost";
     private static final String TAG = OauthActivity.class.getSimpleName();
 
+    @SuppressWarnings("unused")
     public static void startActivityForResult(Activity activity, int requestCode) {
 
         Intent intent = new Intent(activity, OauthActivity.class);
         activity.startActivityForResult(intent, requestCode);
     }
 
+    @SuppressWarnings("unused")
     public static void startActivityForResult(Fragment fragment, int requestCode) {
 
         Intent intent = new Intent(fragment.getContext(), OauthActivity.class);
@@ -54,14 +52,11 @@ public class OauthActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.black));
 
-        String url = UrlUtils.getAuthorizationUrl(Region.EU, getString(R.string.battlenet_lib_api_key), REDIRECT_URI);
+        String url = UrlUtils.getAuthorizationUrl(Region.EU, getString(R.string.battlenet_lib_api_key), Constants.REDIRECT_URI);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap bitmap) {
-
-                Log.d(TAG, "onPageStarted() called with: url = [" + url + "]");
-
             }
 
             @Override
@@ -69,7 +64,7 @@ public class OauthActivity extends AppCompatActivity {
 
                 Log.d(TAG, "onPageFinished() called with: url = [" + url + "]");
 
-                if (url.startsWith(REDIRECT_URI)) {
+                if (url.startsWith(Constants.REDIRECT_URI)) {
 
                     webView.setVisibility(View.INVISIBLE);
 
@@ -79,14 +74,13 @@ public class OauthActivity extends AppCompatActivity {
 
                     OauthSharedPreferences.setAuthorizationCode(OauthActivity.this, code);
 
-                    Log.d(TAG, "onPageFinished code = " + code);
+                    //Log.d(TAG, "onPageFinished code = " + code);
 
                     if (!TextUtils.isEmpty(code)) {
 
                         //Intent data = new Intent();
                         //data.putExtra(Constants.EXTRA_AUTHORIZATION_CODE, code);
                         setResult(Activity.RESULT_OK);
-
 
                     } else {
                         String error = uri.getQueryParameter(Constants.ERROR);
@@ -102,6 +96,16 @@ public class OauthActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // we can't do this, it appears an authorization code can be used only once ???
+
+        /*// if a code was already requested, do not request another one
+        if(TextUtils.isEmpty(OauthSharedPreferences.getAuthorizationCode(this))) {
+            webView.loadUrl(url);
+        } else {
+            setResult(Activity.RESULT_OK);
+            finish();
+        }*/
 
         webView.loadUrl(url);
     }

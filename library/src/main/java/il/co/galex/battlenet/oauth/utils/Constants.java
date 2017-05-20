@@ -15,4 +15,6 @@ public class Constants {
     public static final String EXTRA_ERROR_DESCRIPTION = "EXTRA_ERROR_DESCRIPTION";
 
     public static final int ACTIVITY_RESULT_ERROR = -666;
+
+    public static final String REDIRECT_URI = "https://localhost";
 }

@@ -16,6 +16,9 @@ import il.co.galex.battlenet.common.model.Region;
 
 public class UrlUtils {
 
+    private static final String BASE_URL = "https://%s.battle.net";
+    private static final String BASE_URL_CN = "https://%s.battle.net";
+
     private static final String AUTHORIZE_URI = "https://%s.battle.net/oauth/authorize";
     private static final String AUTHORIZE_URI_CN = "https://www.battlenet.com.cn/oauth/authorize";
 
@@ -39,20 +42,22 @@ public class UrlUtils {
         return null;
     }
 
-    /*public static @Nullable String getTokenUri(@NonNull Region region) {
+    public static @NonNull String getBaseUrl(@NonNull Region region) {
 
         switch (region) {
             case EU:
             case KR:
             case TW:
             case US:
-                return String.format(TOKEN_URI, region.name().toLowerCase());
+                return String.format(BASE_URL, region.name().toLowerCase());
             case CN:
-                return TOKEN_URI_CN;
+                return BASE_URL_CN;
+            default:
+                return String.format(BASE_URL, Region.EU.name().toLowerCase());
         }
-        return null;
     }
 
+    /*
     public static @Nullable String getCheckTokenUri(@NonNull Region region, @NonNull String token) {
 
         switch (region) {
