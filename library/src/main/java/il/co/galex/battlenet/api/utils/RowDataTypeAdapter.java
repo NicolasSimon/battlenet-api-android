@@ -7,10 +7,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
 import il.co.galex.battlenet.api.d3.model.common.BattleTag;
-import il.co.galex.battlenet.api.d3.model.common.Gender;
-import il.co.galex.battlenet.api.d3.model.common.HeroClass;
-import il.co.galex.battlenet.api.d3.model.season.PlayerData;
-import il.co.galex.battlenet.api.d3.model.season.RowData;
+import il.co.galex.battlenet.api.d3.model.leaderboard.RowData;
 
 /**
  * @author Alexander Gherschon
@@ -50,6 +47,12 @@ public class RowDataTypeAdapter extends TypeAdapter<RowData> {
                 case "RiftLevel" : {
                     int value = in.nextInt();
                     rowData.setRiftLevel(value);
+                    break;
+                }
+
+                case "RiftTime": {
+                    long value = in.nextLong();
+                    rowData.setRiftTime(value);
                     break;
                 }
 

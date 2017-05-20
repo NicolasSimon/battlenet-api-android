@@ -2,6 +2,7 @@ package il.co.galex.battlenet.api.d3.network;
 
 import il.co.galex.battlenet.api.d3.model.era.Era;
 import il.co.galex.battlenet.api.d3.model.era.EraIndex;
+import il.co.galex.battlenet.api.d3.model.era.EraLeaderboard;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
 import il.co.galex.battlenet.api.d3.model.season.SeasonLeaderboard;
@@ -26,4 +27,7 @@ public interface GameDataService {
 
     @GET("/data/d3/era/{eraId}")
     Call<Era> getEra(@Path("eraId") Integer eraId, @Query("access_token") String accessToken);
+
+    @GET("/data/d3/era/{eraId}/leaderboard/{leaderboard}")
+    Call<EraLeaderboard> getEraLeaderboard(@Path("eraId") Integer eraId, @Path("leaderboard") String leaderboard, @Query("access_token") String accessToken);
 }

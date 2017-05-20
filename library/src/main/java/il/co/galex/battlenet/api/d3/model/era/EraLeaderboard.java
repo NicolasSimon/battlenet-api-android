@@ -1,4 +1,4 @@
-package il.co.galex.battlenet.api.d3.model.season;
+package il.co.galex.battlenet.api.d3.model.era;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -14,7 +14,7 @@ import il.co.galex.battlenet.api.d3.model.leaderboard.Title;
  * @author Alexander Gherschon
  */
 
-public class SeasonLeaderboard {
+public class EraLeaderboard {
 
     @SerializedName("_links")
     private Links links;
@@ -40,7 +40,7 @@ public class SeasonLeaderboard {
     @SerializedName("greater_rift_solo_class")
     private HeroClass greaterRiftSoloClass;
 
-    private Integer season;
+    private Integer era;
 
     public Links getLinks() {
         return links;
@@ -55,7 +55,7 @@ public class SeasonLeaderboard {
     }
 
     public void setRows(List<Row> row) {
-        this.rows = rows;
+        this.rows = row;
     }
 
     public String getKey() {
@@ -98,12 +98,28 @@ public class SeasonLeaderboard {
         this.achievementPoints = achievementPoints;
     }
 
-    public Integer getSeason() {
-        return season;
+    public Boolean getGreaterRift() {
+        return greaterRift;
     }
 
-    public void setSeason(Integer season) {
-        this.season = season;
+    public void setGreaterRift(Boolean greaterRift) {
+        this.greaterRift = greaterRift;
+    }
+
+    public HeroClass getGreaterRiftSoloClass() {
+        return greaterRiftSoloClass;
+    }
+
+    public void setGreaterRiftSoloClass(HeroClass greaterRiftSoloClass) {
+        this.greaterRiftSoloClass = greaterRiftSoloClass;
+    }
+
+    public Integer getEra() {
+        return era;
+    }
+
+    public void setEra(Integer era) {
+        this.era = era;
     }
 
     @Override
@@ -116,7 +132,9 @@ public class SeasonLeaderboard {
                 ", lastUpdateTime=" + lastUpdateTime +
                 ", generatedBy='" + generatedBy + '\'' +
                 ", achievementPoints=" + achievementPoints +
-                ", season=" + season +
+                ", greaterRift=" + greaterRift +
+                ", greaterRiftSoloClass=" + greaterRiftSoloClass +
+                ", era=" + era +
                 '}';
     }
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import il.co.galex.battlenet.api.d3.model.common.Region;
 import il.co.galex.battlenet.api.d3.model.era.Era;
 import il.co.galex.battlenet.api.d3.model.era.EraIndex;
+import il.co.galex.battlenet.api.d3.model.era.EraLeaderboard;
 import il.co.galex.battlenet.api.d3.model.leaderboard.LeaderboardType;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
@@ -150,6 +151,31 @@ public final class GameDataAPI {
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<Era> call = service.getEra(eraId, accessToken);
+        call.enqueue(callback);
+    }
+
+    public static EraLeaderboard getEraLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer eraId, @NonNull LeaderboardType leaderboardType, @NonNull String accessToken) {
+
+        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        GameDataService service = retrofit.create(GameDataService.class);
+
+        Call<EraLeaderboard> call = service.getEraLeaderboard(eraId, leaderboardType.getValue(), accessToken);
+
+        try {
+            Response<EraLeaderboard> response = call.execute();
+            if (response.code() == 200) return response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void getEraLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer eraId, @NonNull LeaderboardType leaderboardType, @NonNull String accessToken, Callback<EraLeaderboard> callback) {
+
+        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        GameDataService service = retrofit.create(GameDataService.class);
+
+        Call<EraLeaderboard> call = service.getEraLeaderboard(eraId, leaderboardType.getValue(), accessToken);
         call.enqueue(callback);
     }
 }

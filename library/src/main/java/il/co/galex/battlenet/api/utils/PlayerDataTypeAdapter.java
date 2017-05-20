@@ -2,7 +2,6 @@ package il.co.galex.battlenet.api.utils;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
@@ -10,7 +9,7 @@ import java.io.IOException;
 import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 import il.co.galex.battlenet.api.d3.model.common.Gender;
 import il.co.galex.battlenet.api.d3.model.common.HeroClass;
-import il.co.galex.battlenet.api.d3.model.season.PlayerData;
+import il.co.galex.battlenet.api.d3.model.leaderboard.PlayerData;
 
 /**
  * @author Alexander Gherschon

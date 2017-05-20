@@ -1,4 +1,4 @@
-package il.co.galex.battlenet.api.d3.model.season;
+package il.co.galex.battlenet.api.d3.model.leaderboard;
 
 import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 

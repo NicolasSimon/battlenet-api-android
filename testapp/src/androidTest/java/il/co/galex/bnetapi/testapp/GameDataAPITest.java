@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import il.co.galex.battlenet.api.d3.model.common.Region;
 import il.co.galex.battlenet.api.d3.model.era.Era;
 import il.co.galex.battlenet.api.d3.model.era.EraIndex;
+import il.co.galex.battlenet.api.d3.model.era.EraLeaderboard;
 import il.co.galex.battlenet.api.d3.model.leaderboard.LeaderboardType;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
@@ -224,5 +225,44 @@ public class GameDataAPITest {
 
         assertNotNull(data[0]);
         assertNotNull(data[0].getEraId());
+    }
+
+    @Test
+    public void getEraLeaderboardSync() throws Exception {
+
+        Context context = InstrumentationRegistry.getTargetContext();
+
+        EraLeaderboard data = GameDataAPI.getEraLeaderboard(context, Region.EU, 6, LeaderboardType.RIFT_DH, ACCESS_TOKEN);
+        assertNotNull(data);
+        assertNotNull(data.getEra());
+    }
+
+    @Test
+    public void getEraLeaderboardAsync() throws Exception {
+
+        final CountDownLatch lock = new CountDownLatch(1);
+        final Context context = InstrumentationRegistry.getTargetContext();
+
+        final EraLeaderboard[] data = new EraLeaderboard[1];
+
+        GameDataAPI.getEraLeaderboard(context, Region.EU, 7, LeaderboardType.RIFT_DH, ACCESS_TOKEN, new Callback<EraLeaderboard>() {
+            @Override
+            public void onResponse(Call<EraLeaderboard> call, Response<EraLeaderboard> response) {
+
+                data[0] = response.body();
+                lock.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<EraLeaderboard> call, Throwable t) {
+
+                lock.countDown();
+            }
+        });
+
+        lock.await(2000, TimeUnit.MILLISECONDS);
+
+        assertNotNull(data[0]);
+        assertNotNull(data[0].getEra());
     }
 }
