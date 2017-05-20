@@ -23,6 +23,16 @@ This library gives you access to the [APIs of Battle.net](https://dev.battle.net
 ###### ACCOUNT API
 * **USER** /ACCOUNT/USER
 
+### Game Data API
+###### D3
+* **USER** /ACCOUNT/USER
+* **SEASON INDEX** /DATA/D3/SEASON/
+* **SEASON** /DATA/D3/SEASON/:ID
+* **SEASON LEADERBOARD** /DATA/D3/SEASON/:ID/LEADERBOARD/:LEADERBOARD
+* **ERA INDEX** /DATA/D3/ERA/
+* **ERA** /DATA/D3/ERA/:ID
+* **ERA LEADERBOARD** /DATA/D3/ERA/:ID/LEADERBOARD/:LEADERBOARD
+
 # Library API
 
 ## Entry points
@@ -57,7 +67,3 @@ To set up your own API KEY and API SECRET, override the next values in your stri
 <string name="battlenet_lib_api_key">YOUR-API-KEY-HERE</string>
 <string name="battlenet_lib_api_secret">YOUR-API-SECRETKEY-HERE</string>
 ```
-
-# DEV STATUS
-
-Currently under development - come back soon :)
