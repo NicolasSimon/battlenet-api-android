@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import java.io.IOException;
 
 import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.api.d3.model.era.EraIndex;
 import il.co.galex.battlenet.api.d3.model.leaderboard.Leaderboard;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
@@ -98,6 +99,31 @@ public final class GameDataAPI {
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<SeasonLeaderboard> call = service.getSeasonLeaderboard(seasonId, leaderboard.getValue(), accessToken);
+        call.enqueue(callback);
+    }
+
+    public static EraIndex getEraIndex(@NonNull Context context, @NonNull Region region, @NonNull String accessToken) {
+
+        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        GameDataService service = retrofit.create(GameDataService.class);
+
+        Call<EraIndex> call = service.getEraIndex(accessToken);
+
+        try {
+            Response<EraIndex> response = call.execute();
+            if (response.code() == 200) return response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void getEraIndex(@NonNull Context context, @NonNull Region region, @NonNull String accessToken, Callback<EraIndex> callback) {
+
+        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        GameDataService service = retrofit.create(GameDataService.class);
+
+        Call<EraIndex> call = service.getEraIndex(accessToken);
         call.enqueue(callback);
     }
 }

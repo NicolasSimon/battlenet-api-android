@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 import java.util.List;
 
+import il.co.galex.battlenet.api.d3.model.common.Link;
+import il.co.galex.battlenet.api.d3.model.common.Links;
+
 /**
  * @author Alexander Gherschon
  */

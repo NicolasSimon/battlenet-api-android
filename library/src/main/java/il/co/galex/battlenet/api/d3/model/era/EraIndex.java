@@ -1,25 +1,27 @@
-package il.co.galex.battlenet.api.d3.model.season;
+package il.co.galex.battlenet.api.d3.model.era;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 import java.util.List;
 
+import il.co.galex.battlenet.api.d3.model.common.Link;
 import il.co.galex.battlenet.api.d3.model.common.Links;
 
 /**
  * @author Alexander Gherschon
  */
 
-public class Season {
+public class EraIndex {
 
     @SerializedName("_links")
     private Links links;
 
-    private List<Leaderboard> leaderboard;
+    @SerializedName("era")
+    private List<Link> eraLinks;
 
-    @SerializedName("season_id")
-    private Integer seasonId;
+    @SerializedName("current_era")
+    private Integer currentEra;
 
     @SerializedName("last-update-time")
     private Date lastUpdateTime;
@@ -35,20 +37,20 @@ public class Season {
         this.links = links;
     }
 
-    public List<Leaderboard> getLeaderboard() {
-        return leaderboard;
+    public List<Link> getEraLinks() {
+        return eraLinks;
     }
 
-    public void setLeaderboard(List<Leaderboard> leaderboard) {
-        this.leaderboard = leaderboard;
+    public void setEraLinks(List<Link> eraLinks) {
+        this.eraLinks = eraLinks;
     }
 
-    public Integer getSeasonId() {
-        return seasonId;
+    public Integer getCurrentEra() {
+        return currentEra;
     }
 
-    public void setSeasonId(Integer seasonId) {
-        this.seasonId = seasonId;
+    public void setCurrentEra(Integer currentEra) {
+        this.currentEra = currentEra;
     }
 
     public Date getLastUpdateTime() {
@@ -71,8 +73,8 @@ public class Season {
     public String toString() {
         return "{" +
                 "links=" + links +
-                ", leaderboard=" + leaderboard +
-                ", seasonId=" + seasonId +
+                ", eraLinks=" + eraLinks +
+                ", currentEra=" + currentEra +
                 ", lastUpdateTime=" + lastUpdateTime +
                 ", generatedBy='" + generatedBy + '\'' +
                 '}';

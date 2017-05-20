@@ -9,6 +9,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.api.d3.model.era.EraIndex;
 import il.co.galex.battlenet.api.d3.model.leaderboard.Leaderboard;
 import il.co.galex.battlenet.api.d3.model.season.Season;
 import il.co.galex.battlenet.api.d3.model.season.SeasonIndex;
@@ -144,5 +145,44 @@ public class GameDataAPITest {
 
         assertNotNull(data[0]);
         assertNotNull(data[0].getSeason());
+    }
+
+    @Test
+    public void getEraIndexSync() throws Exception {
+
+        Context context = InstrumentationRegistry.getTargetContext();
+
+        EraIndex data = GameDataAPI.getEraIndex(context, Region.EU, ACCESS_TOKEN);
+        assertNotNull(data);
+        assertNotNull(data.getCurrentEra());
+    }
+
+    @Test
+    public void getEraIndexAsync() throws Exception {
+
+        final CountDownLatch lock = new CountDownLatch(1);
+        final Context context = InstrumentationRegistry.getTargetContext();
+
+        final EraIndex[] data = new EraIndex[1];
+
+        GameDataAPI.getEraIndex(context, Region.EU, ACCESS_TOKEN, new Callback<EraIndex>() {
+            @Override
+            public void onResponse(Call<EraIndex> call, Response<EraIndex> response) {
+
+                data[0] = response.body();
+                lock.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<EraIndex> call, Throwable t) {
+
+                lock.countDown();
+            }
+        });
+
+        lock.await(2000, TimeUnit.MILLISECONDS);
+
+        assertNotNull(data[0]);
+        assertNotNull(data[0].getCurrentEra());
     }
 }
