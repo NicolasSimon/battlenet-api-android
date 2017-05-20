@@ -1,7 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="il.co.galex.bnetapi">
-    <application />
 
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <activity
+            android:noHistory="true"
+            android:name="il.co.galex.battlenet.oauth.activity.OauthActivity"
+            android:label="@string/title_activity_oauth"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
 
 </manifest>

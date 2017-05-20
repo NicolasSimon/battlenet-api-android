@@ -1,4 +1,4 @@
-package il.co.galex.battlenet.api.d3.model.common;
+package il.co.galex.battlenet.common.model;
 
 /**
  * Represents the different regions in the Battle.net API
@@ -8,5 +8,5 @@ package il.co.galex.battlenet.api.d3.model.common;
 
 public enum Region {
 
-    EU, KR, TW, US
+    EU, KR, TW, US, CN
 }

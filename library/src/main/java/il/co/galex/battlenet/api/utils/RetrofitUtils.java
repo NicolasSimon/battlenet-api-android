@@ -7,7 +7,7 @@ import com.google.gson.GsonBuilder;
 
 import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 import il.co.galex.battlenet.api.d3.model.common.HeroClass;
-import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.common.model.Region;
 import il.co.galex.battlenet.api.d3.model.common.TooltipParams;
 import il.co.galex.battlenet.api.d3.model.item.AttributesRaw;
 import il.co.galex.battlenet.api.d3.model.leaderboard.PlayerData;

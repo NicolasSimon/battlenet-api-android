@@ -14,7 +14,7 @@ import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 import il.co.galex.battlenet.api.d3.model.career.CareerProfile;
 import il.co.galex.battlenet.api.d3.model.hero.HeroProfile;
 import il.co.galex.battlenet.api.d3.model.common.Locale;
-import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.common.model.Region;
 import il.co.galex.battlenet.api.d3.model.item.ItemData;
 import il.co.galex.battlenet.api.d3.network.D3CommunityAPI;
 import retrofit2.Call;

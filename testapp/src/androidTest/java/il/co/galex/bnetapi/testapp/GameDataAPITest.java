@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.common.model.Region;
 import il.co.galex.battlenet.api.d3.model.era.Era;
 import il.co.galex.battlenet.api.d3.model.era.EraIndex;
 import il.co.galex.battlenet.api.d3.model.era.EraLeaderboard;

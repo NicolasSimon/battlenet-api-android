@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import java.io.IOException;
 
-import il.co.galex.battlenet.api.d3.model.common.Region;
+import il.co.galex.battlenet.common.model.Region;
 import il.co.galex.battlenet.api.d3.model.era.Era;
 import il.co.galex.battlenet.api.d3.model.era.EraIndex;
 import il.co.galex.battlenet.api.d3.model.era.EraLeaderboard;
