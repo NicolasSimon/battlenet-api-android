@@ -11,6 +11,7 @@ import java.util.Map;
 import il.co.galex.battlenet.api.d3.model.era.Era;
 import il.co.galex.battlenet.common.model.Region;
 import il.co.galex.battlenet.oauth.model.AccessToken;
+import il.co.galex.battlenet.oauth.model.CheckToken;
 import il.co.galex.battlenet.oauth.utils.Constants;
 import il.co.galex.battlenet.oauth.utils.OauthRetrofitUtils;
 import il.co.galex.battlenet.oauth.utils.OauthSharedPreferences;
@@ -75,5 +76,42 @@ public class OauthAPI {
 
         } else
             throw new IllegalArgumentException("getAccessToken called without having an authorization code");
+    }
+
+    public static CheckToken checkToken(@NonNull Context context, @NonNull Region region) {
+
+        AccessToken accessToken = OauthSharedPreferences.getAccessToken(context);
+        if (accessToken != null) {
+
+            Retrofit retrofit = OauthRetrofitUtils.getInstance(context, region);
+            OauthService oauthService = retrofit.create(OauthService.class);
+
+            Call<CheckToken> call = oauthService.checkToken(accessToken.getValue());
+
+            try {
+                Response<CheckToken> response = call.execute();
+                if (response.code() == 200) return response.body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+
+        } else
+            throw new IllegalArgumentException("No access token were found, use getAccessToken() first");
+    }
+
+    public static void checkToken(@NonNull Context context, @NonNull Region region, Callback<CheckToken> callback) {
+
+        AccessToken accessToken = OauthSharedPreferences.getAccessToken(context);
+        if (accessToken != null) {
+
+            Retrofit retrofit = OauthRetrofitUtils.getInstance(context, region);
+            OauthService oauthService = retrofit.create(OauthService.class);
+
+            Call<CheckToken> call = oauthService.checkToken(accessToken.getValue());
+            call.enqueue(callback);
+
+        } else
+            throw new IllegalArgumentException("No access token were found, use getAccessToken() first");
     }
 }

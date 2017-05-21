@@ -69,20 +69,15 @@ public class OauthActivity extends AppCompatActivity {
                     webView.setVisibility(View.INVISIBLE);
 
                     Uri uri = Uri.parse(url);
-                    // here we should extract the authorization code and use it to get a first token probably ?
                     String code = uri.getQueryParameter(Constants.CODE);
-
                     OauthSharedPreferences.setAuthorizationCode(OauthActivity.this, code);
-
-                    //Log.d(TAG, "onPageFinished code = " + code);
 
                     if (!TextUtils.isEmpty(code)) {
 
-                        //Intent data = new Intent();
-                        //data.putExtra(Constants.EXTRA_AUTHORIZATION_CODE, code);
                         setResult(Activity.RESULT_OK);
 
                     } else {
+
                         String error = uri.getQueryParameter(Constants.ERROR);
                         String errorDescription = uri.getQueryParameter(Constants.ERROR_DESCRIPTION);
 
@@ -97,16 +92,7 @@ public class OauthActivity extends AppCompatActivity {
             }
         });
 
-        // we can't do this, it appears an authorization code can be used only once ???
-
-        /*// if a code was already requested, do not request another one
-        if(TextUtils.isEmpty(OauthSharedPreferences.getAuthorizationCode(this))) {
-            webView.loadUrl(url);
-        } else {
-            setResult(Activity.RESULT_OK);
-            finish();
-        }*/
-
+        // load the page with the redirect uri
         webView.loadUrl(url);
     }
 }

@@ -11,6 +11,7 @@ import android.widget.Button;
 import il.co.galex.battlenet.common.model.Region;
 import il.co.galex.battlenet.oauth.activity.OauthActivity;
 import il.co.galex.battlenet.oauth.model.AccessToken;
+import il.co.galex.battlenet.oauth.model.CheckToken;
 import il.co.galex.battlenet.oauth.network.OauthAPI;
 import il.co.galex.battlenet.oauth.utils.Constants;
 import il.co.galex.battlenet.oauth.utils.OauthSharedPreferences;
@@ -32,6 +33,20 @@ public class StartActivity extends AppCompatActivity {
         login.setOnClickListener(view -> {
 
             OauthActivity.startActivityForResult(this, REQUEST_CODE);
+        });
+
+        OauthAPI.checkToken(this, Region.EU, new Callback<CheckToken>() {
+            @Override
+            public void onResponse(Call<CheckToken> call, Response<CheckToken> response) {
+
+                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+            }
+
+            @Override
+            public void onFailure(Call<CheckToken> call, Throwable t) {
+
+                Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+            }
         });
     }
 
