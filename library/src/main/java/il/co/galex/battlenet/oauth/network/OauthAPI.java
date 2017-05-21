@@ -1,14 +1,15 @@
 package il.co.galex.battlenet.oauth.network;
 
 import android.content.Context;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import il.co.galex.battlenet.api.d3.model.era.Era;
 import il.co.galex.battlenet.common.model.Region;
 import il.co.galex.battlenet.oauth.model.AccessToken;
 import il.co.galex.battlenet.oauth.model.CheckToken;
@@ -21,11 +22,18 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
+ * Oauth related API calls
  * @author Alexander Gherschon
  */
 
-public class OauthAPI {
+@SuppressWarnings("unused")
+public final class OauthAPI {
 
+    private OauthAPI() {
+
+    }
+
+    @WorkerThread
     public static AccessToken getAccessToken(@NonNull Context context, @NonNull Region region, @NonNull String redirectUri, @NonNull String scope) {
 
         String authorizationCode = OauthSharedPreferences.getAuthorizationCode(context);
@@ -56,6 +64,7 @@ public class OauthAPI {
             throw new IllegalArgumentException("getAccessToken called without having an authorization code");
     }
 
+    @MainThread
     public static void getAccessToken(@NonNull Context context, @NonNull Region region, @NonNull String redirectUri, @NonNull String scope, @NonNull Callback<AccessToken> callback) {
 
         String authorizationCode = OauthSharedPreferences.getAuthorizationCode(context);
@@ -78,6 +87,7 @@ public class OauthAPI {
             throw new IllegalArgumentException("getAccessToken called without having an authorization code");
     }
 
+    @WorkerThread
     public static CheckToken checkToken(@NonNull Context context, @NonNull Region region) {
 
         AccessToken accessToken = OauthSharedPreferences.getAccessToken(context);
@@ -100,6 +110,7 @@ public class OauthAPI {
             throw new IllegalArgumentException("No access token were found, use getAccessToken() first");
     }
 
+    @MainThread
     public static void checkToken(@NonNull Context context, @NonNull Region region, Callback<CheckToken> callback) {
 
         AccessToken accessToken = OauthSharedPreferences.getAccessToken(context);
