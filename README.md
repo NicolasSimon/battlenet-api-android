@@ -7,6 +7,14 @@
 
 This library gives you access to the [APIs of Battle.net](https://dev.battle.net/io-docs) based on the [Retrofit](http://square.github.io/retrofit/) library.
 
+# Oauth2
+
+Some of the APIs require Oauth2, so for getting a valid access token you can use:
+```java
+OauthActivity.startActivity()
+```
+Check out the sampleapp module for the complete flow!
+
 # Available APIs
 
 ### D3 Community API 

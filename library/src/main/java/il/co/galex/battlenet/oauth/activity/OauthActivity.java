@@ -160,6 +160,7 @@ public class OauthActivity extends AppCompatActivity {
 
         Class<? extends Activity> activityClass = (Class<? extends Activity>) getIntent().getSerializableExtra(ACTIVITY_CLASS_EXTRA);
         Intent intent = new Intent(this, activityClass);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 }

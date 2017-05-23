@@ -22,12 +22,6 @@ public class UrlUtils {
     private static final String AUTHORIZE_URI = "https://%s.battle.net/oauth/authorize";
     private static final String AUTHORIZE_URI_CN = "https://www.battlenet.com.cn/oauth/authorize";
 
-    private static final String TOKEN_URI = "https://%s.battle.net/oauth/token";
-    private static final String TOKEN_URI_CN = "https://www.battlenet.com.cn/oauth/token";
-
-    private static final String CHECK_TOKEN_URI = "https://%s.battle.net/oauth/check_token?token=%s";
-    private static final String CHECK_TOKEN_URI_CN = "https://www.battlenet.com.cn/oauth/check_token?token=%s";
-
     private static @Nullable String getAuthorizeUri(@NonNull Region region) {
 
         switch (region) {
@@ -56,21 +50,6 @@ public class UrlUtils {
                 return String.format(BASE_URL, Region.EU.name().toLowerCase());
         }
     }
-
-    /*
-    public static @Nullable String getCheckTokenUri(@NonNull Region region, @NonNull String token) {
-
-        switch (region) {
-            case EU:
-            case KR:
-            case TW:
-            case US:
-                return String.format(CHECK_TOKEN_URI, region.name().toLowerCase(), token);
-            case CN:
-                return String.format(CHECK_TOKEN_URI_CN, region);
-        }
-        return null;
-    }*/
 
     public static @Nullable String getAuthorizationUrl(@NonNull Region region, @NonNull String clientId, @NonNull String redirectUri) {
 
