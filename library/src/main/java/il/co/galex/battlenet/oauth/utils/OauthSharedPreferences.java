@@ -10,28 +10,16 @@ import com.google.gson.Gson;
 import il.co.galex.battlenet.oauth.model.AccessToken;
 
 /**
+ * Keeps the Access Token object into shared preferences
  * @author Alexander Gherschon
  */
 
 public class OauthSharedPreferences {
 
     private static String SHARED_PREFERENCES = "OAUTH_SHARED_PREFERENCES";
-    private static final String AUTHORIZATION_CODE = "AUTHORIZATION_CODE";
     private static final String ACCESS_TOKEN = "ACCESS_TOKEN";
 
     private static final Gson GSON = new Gson();
-
-    public static void setAuthorizationCode(@NonNull Context context, @NonNull String authorizationCode) {
-
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        sharedPreferences.edit().putString(AUTHORIZATION_CODE, authorizationCode).apply();
-    }
-
-    public static @Nullable String getAuthorizationCode(@NonNull Context context) {
-
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(AUTHORIZATION_CODE, null);
-    }
 
     public static void setAccessToken(@NonNull Context context, @NonNull AccessToken accessToken) {
 
@@ -44,5 +32,11 @@ public class OauthSharedPreferences {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
         String json = sharedPreferences.getString(ACCESS_TOKEN, null);
         return GSON.fromJson(json, AccessToken.class);
+    }
+
+    public static void clearAccessToken(@NonNull Context context) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        sharedPreferences.edit().remove(ACCESS_TOKEN).apply();
     }
 }

@@ -17,7 +17,7 @@ public class AccessToken {
     @SerializedName("expires_in")
     private Long expiresIn;
 
-    private Long createdAt = System.currentTimeMillis();
+    private Long createdAt;
 
     public String getValue() {
         return value;
@@ -35,20 +35,16 @@ public class AccessToken {
         this.tokenType = tokenType;
     }
 
-    public Long getExpiresIn() {
-        return expiresIn;
-    }
-
-    public void setExpiresIn(Long expiresIn) {
-        this.expiresIn = expiresIn;
-    }
-
     public Long getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public boolean hasExpired() {
+        return expiresIn != null && (expiresIn * 1000) + createdAt < System.currentTimeMillis();
     }
 
     @Override

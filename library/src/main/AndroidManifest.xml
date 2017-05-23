@@ -6,9 +6,9 @@
 
     <application>
         <activity
-            android:noHistory="true"
             android:name="il.co.galex.battlenet.oauth.activity.OauthActivity"
             android:label="@string/title_activity_oauth"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

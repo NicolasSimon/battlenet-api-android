@@ -34,9 +34,7 @@ public final class OauthAPI {
     }
 
     @WorkerThread
-    public static AccessToken getAccessToken(@NonNull Context context, @NonNull Region region, @NonNull String redirectUri, @NonNull String scope) {
-
-        String authorizationCode = OauthSharedPreferences.getAuthorizationCode(context);
+    public static AccessToken getAccessToken(@NonNull Context context, @NonNull Region region, @NonNull String redirectUri, @NonNull String scope, @NonNull String authorizationCode) {
 
         if (!TextUtils.isEmpty(authorizationCode)) {
 
@@ -65,9 +63,7 @@ public final class OauthAPI {
     }
 
     @MainThread
-    public static void getAccessToken(@NonNull Context context, @NonNull Region region, @NonNull String redirectUri, @NonNull String scope, @NonNull Callback<AccessToken> callback) {
-
-        String authorizationCode = OauthSharedPreferences.getAuthorizationCode(context);
+    public static void getAccessToken(@NonNull Context context, @NonNull Region region, @NonNull String redirectUri, @NonNull String scope, @NonNull String authorizationCode, @NonNull Callback<AccessToken> callback) {
 
         if (!TextUtils.isEmpty(authorizationCode)) {
 
