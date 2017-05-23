@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
             AccessToken accessToken = OauthSharedPreferences.getAccessToken(MainActivity.this);
             if (accessToken != null) {
-                CommunityOAuthProfileAPI.getUser(this, Region.EU, accessToken.getValue(), new Callback<User>() {
+                CommunityOAuthProfileAPI.getUser(this.getApplicationContext(), Region.EU, accessToken.getValue(), new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
 

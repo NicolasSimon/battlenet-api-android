@@ -38,7 +38,6 @@ public class OauthActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private WebView webView;
-
     public static void startActivity(Context context, Region region, Class<? extends Activity> activityClass) {
 
         Intent intent = new Intent(context, OauthActivity.class);
