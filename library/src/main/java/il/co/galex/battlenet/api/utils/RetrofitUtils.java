@@ -7,11 +7,11 @@ import com.google.gson.GsonBuilder;
 
 import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 import il.co.galex.battlenet.api.d3.model.common.HeroClass;
-import il.co.galex.battlenet.common.model.Region;
 import il.co.galex.battlenet.api.d3.model.common.TooltipParams;
 import il.co.galex.battlenet.api.d3.model.item.AttributesRaw;
 import il.co.galex.battlenet.api.d3.model.leaderboard.PlayerData;
 import il.co.galex.battlenet.api.d3.model.leaderboard.RowData;
+import il.co.galex.battlenet.common.model.Region;
 import il.co.galex.bnetapi.BuildConfig;
 import il.co.galex.bnetapi.R;
 import okhttp3.HttpUrl;
@@ -27,26 +27,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class RetrofitUtils {
 
-    private static Retrofit instance;
-
     private RetrofitUtils() {
 
     }
 
-    public static Retrofit getInstance(Context context, Region region) {
-
-        if(instance == null) {
-            instance = getRetrofit(context, region);
-        }
-
-        return instance;
-    }
-
-    private static Retrofit getRetrofit(final Context context, Region region) {
+    public static Retrofit getRetrofit(final Context context, Region region) {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-        if(BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
 
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -54,6 +43,7 @@ public final class RetrofitUtils {
         }
 
         httpClient.addInterceptor(chain -> {
+
             Request original = chain.request();
             HttpUrl originalHttpUrl = original.url();
 

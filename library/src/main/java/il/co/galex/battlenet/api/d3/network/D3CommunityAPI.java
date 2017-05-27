@@ -42,7 +42,7 @@ public final class D3CommunityAPI {
     @WorkerThread
     public static CareerProfile getCareerProfile(@NonNull Context context, @NonNull Region region, @NonNull BattleTag battleTag, @NonNull Locale locale) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         D3CommunityService service = retrofit.create(D3CommunityService.class);
 
         Call<CareerProfile> call = service.getCareerProfile(battleTag.getApiFormat(), locale.getValue());
@@ -69,7 +69,7 @@ public final class D3CommunityAPI {
     @MainThread
     public static void getCareerProfile(@NonNull Context context, @NonNull Region region, @NonNull BattleTag battleTag, @NonNull Locale locale, @NonNull Callback<CareerProfile> callback) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         D3CommunityService service = retrofit.create(D3CommunityService.class);
 
         Call<CareerProfile> call = service.getCareerProfile(battleTag.getApiFormat(), locale.getValue());
@@ -89,7 +89,7 @@ public final class D3CommunityAPI {
     @WorkerThread
     public static HeroProfile getHeroProfile(@NonNull Context context, @NonNull Region region, @NonNull BattleTag battleTag, @NonNull Long heroId, @NonNull Locale locale) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         D3CommunityService service = retrofit.create(D3CommunityService.class);
 
         Call<HeroProfile> call = service.getHeroProfile(battleTag.getApiFormat(), heroId, locale.getValue());
@@ -117,7 +117,7 @@ public final class D3CommunityAPI {
     @MainThread
     public static void getHeroProfile(@NonNull Context context, @NonNull Region region, @NonNull BattleTag battleTag, @NonNull Long heroId, @NonNull Locale locale, @NonNull Callback<HeroProfile> callback) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         D3CommunityService service = retrofit.create(D3CommunityService.class);
 
         Call<HeroProfile> call = service.getHeroProfile(battleTag.getApiFormat(), heroId, locale.getValue());
@@ -136,7 +136,7 @@ public final class D3CommunityAPI {
     @WorkerThread
     public static ItemData getItemData(@NonNull Context context, @NonNull Region region, @NonNull String itemId, @NonNull Locale locale) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         D3CommunityService service = retrofit.create(D3CommunityService.class);
 
         Call<ItemData> call = service.getItemData(itemId, locale.getValue());
@@ -163,7 +163,7 @@ public final class D3CommunityAPI {
     @MainThread
     public static void getItemData(@NonNull Context context, @NonNull Region region, @NonNull String itemId, @NonNull Locale locale, @NonNull Callback<ItemData> callback) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         D3CommunityService service = retrofit.create(D3CommunityService.class);
 
         Call<ItemData> call = service.getItemData(itemId, locale.getValue());
