@@ -25,7 +25,7 @@ public final class CommunityOAuthProfileAPI {
 
     public static User getUser(@NonNull Context context, @NonNull Region region, @NonNull String accessToken) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         CommunityOAuthProfileService service = retrofit.create(CommunityOAuthProfileService.class);
 
         Call<User> call = service.getUser(accessToken);
@@ -41,7 +41,7 @@ public final class CommunityOAuthProfileAPI {
 
     public static void getUser(@NonNull Context context, @NonNull Region region, @NonNull String accessToken, Callback<User> callback) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         CommunityOAuthProfileService service = retrofit.create(CommunityOAuthProfileService.class);
 
         Call<User> call = service.getUser(accessToken);

@@ -31,7 +31,7 @@ public final class GameDataAPI {
 
     public static SeasonIndex getSeasonIndex(@NonNull Context context, @NonNull Region region, @NonNull String accessToken) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<SeasonIndex> call = service.getSeasonIndex(accessToken);
@@ -47,7 +47,7 @@ public final class GameDataAPI {
 
     public static void getSeasonIndex(@NonNull Context context, @NonNull Region region, @NonNull String accessToken, Callback<SeasonIndex> callback) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<SeasonIndex> call = service.getSeasonIndex(accessToken);
@@ -56,7 +56,7 @@ public final class GameDataAPI {
 
     public static Season getSeason(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId, @NonNull String accessToken) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<Season> call = service.getSeason(seasonId, accessToken);
@@ -72,7 +72,7 @@ public final class GameDataAPI {
 
     public static void getSeason(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId, @NonNull String accessToken, Callback<Season> callback) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<Season> call = service.getSeason(seasonId, accessToken);
@@ -81,7 +81,7 @@ public final class GameDataAPI {
 
     public static SeasonLeaderboard getSeasonLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId, @NonNull LeaderboardType leaderboardType, @NonNull String accessToken) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<SeasonLeaderboard> call = service.getSeasonLeaderboard(seasonId, leaderboardType.getValue(), accessToken);
@@ -97,7 +97,7 @@ public final class GameDataAPI {
 
     public static void getSeasonLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer seasonId, @NonNull LeaderboardType leaderboardType, @NonNull String accessToken, Callback<SeasonLeaderboard> callback) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<SeasonLeaderboard> call = service.getSeasonLeaderboard(seasonId, leaderboardType.getValue(), accessToken);
@@ -106,7 +106,7 @@ public final class GameDataAPI {
 
     public static EraIndex getEraIndex(@NonNull Context context, @NonNull Region region, @NonNull String accessToken) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<EraIndex> call = service.getEraIndex(accessToken);
@@ -122,7 +122,7 @@ public final class GameDataAPI {
 
     public static void getEraIndex(@NonNull Context context, @NonNull Region region, @NonNull String accessToken, Callback<EraIndex> callback) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<EraIndex> call = service.getEraIndex(accessToken);
@@ -131,7 +131,7 @@ public final class GameDataAPI {
 
     public static Era getEra(@NonNull Context context, @NonNull Region region, @NonNull Integer eraId, @NonNull String accessToken) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<Era> call = service.getEra(eraId, accessToken);
@@ -147,7 +147,7 @@ public final class GameDataAPI {
 
     public static void getEra(@NonNull Context context, @NonNull Region region, @NonNull Integer eraId, @NonNull String accessToken, Callback<Era> callback) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<Era> call = service.getEra(eraId, accessToken);
@@ -156,7 +156,7 @@ public final class GameDataAPI {
 
     public static EraLeaderboard getEraLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer eraId, @NonNull LeaderboardType leaderboardType, @NonNull String accessToken) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<EraLeaderboard> call = service.getEraLeaderboard(eraId, leaderboardType.getValue(), accessToken);
@@ -172,7 +172,7 @@ public final class GameDataAPI {
 
     public static void getEraLeaderboard(@NonNull Context context, @NonNull Region region, @NonNull Integer eraId, @NonNull LeaderboardType leaderboardType, @NonNull String accessToken, Callback<EraLeaderboard> callback) {
 
-        Retrofit retrofit = RetrofitUtils.getInstance(context, region);
+        Retrofit retrofit = RetrofitUtils.getRetrofit(context, region);
         GameDataService service = retrofit.create(GameDataService.class);
 
         Call<EraLeaderboard> call = service.getEraLeaderboard(eraId, leaderboardType.getValue(), accessToken);
