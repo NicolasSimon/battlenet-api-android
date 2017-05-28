@@ -1,10 +1,13 @@
 package il.co.galex.battlenet.api.d3.model.leaderboard;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexander Gherschon
  */
 
-public class Title {
+public class Title implements Parcelable {
 
     private String en_US;
     private String es_MX;
@@ -152,4 +155,59 @@ public class Title {
                 ", zh_CN='" + zh_CN + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.en_US);
+        dest.writeString(this.es_MX);
+        dest.writeString(this.pt_BR);
+        dest.writeString(this.de_DE);
+        dest.writeString(this.en_GB);
+        dest.writeString(this.es_ES);
+        dest.writeString(this.fr_FR);
+        dest.writeString(this.it_IT);
+        dest.writeString(this.pl_PL);
+        dest.writeString(this.pt_PT);
+        dest.writeString(this.ru_RU);
+        dest.writeString(this.ko_KR);
+        dest.writeString(this.zh_TW);
+        dest.writeString(this.zh_CN);
+    }
+
+    public Title() {
+    }
+
+    protected Title(Parcel in) {
+        this.en_US = in.readString();
+        this.es_MX = in.readString();
+        this.pt_BR = in.readString();
+        this.de_DE = in.readString();
+        this.en_GB = in.readString();
+        this.es_ES = in.readString();
+        this.fr_FR = in.readString();
+        this.it_IT = in.readString();
+        this.pl_PL = in.readString();
+        this.pt_PT = in.readString();
+        this.ru_RU = in.readString();
+        this.ko_KR = in.readString();
+        this.zh_TW = in.readString();
+        this.zh_CN = in.readString();
+    }
+
+    public static final Parcelable.Creator<Title> CREATOR = new Parcelable.Creator<Title>() {
+        @Override
+        public Title createFromParcel(Parcel source) {
+            return new Title(source);
+        }
+
+        @Override
+        public Title[] newArray(int size) {
+            return new Title[size];
+        }
+    };
 }

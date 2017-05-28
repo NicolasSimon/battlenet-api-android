@@ -1,5 +1,8 @@
 package il.co.galex.battlenet.api.d3.model.season;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -12,7 +15,7 @@ import il.co.galex.battlenet.api.d3.model.common.Links;
  * @author Alexander Gherschon
  */
 
-public class Season {
+public class Season implements Parcelable {
 
     @SerializedName("_links")
     private Links links;
@@ -78,4 +81,42 @@ public class Season {
                 ", generatedBy='" + generatedBy + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.links, flags);
+        dest.writeTypedList(this.leaderboard);
+        dest.writeValue(this.seasonId);
+        dest.writeLong(this.lastUpdateTime != null ? this.lastUpdateTime.getTime() : -1);
+        dest.writeString(this.generatedBy);
+    }
+
+    public Season() {
+    }
+
+    protected Season(Parcel in) {
+        this.links = in.readParcelable(Links.class.getClassLoader());
+        this.leaderboard = in.createTypedArrayList(Leaderboard.CREATOR);
+        this.seasonId = (Integer) in.readValue(Integer.class.getClassLoader());
+        long tmpLastUpdateTime = in.readLong();
+        this.lastUpdateTime = tmpLastUpdateTime == -1 ? null : new Date(tmpLastUpdateTime);
+        this.generatedBy = in.readString();
+    }
+
+    public static final Parcelable.Creator<Season> CREATOR = new Parcelable.Creator<Season>() {
+        @Override
+        public Season createFromParcel(Parcel source) {
+            return new Season(source);
+        }
+
+        @Override
+        public Season[] newArray(int size) {
+            return new Season[size];
+        }
+    };
 }

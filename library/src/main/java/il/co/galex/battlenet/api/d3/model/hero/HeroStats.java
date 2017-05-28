@@ -1,10 +1,13 @@
 package il.co.galex.battlenet.api.d3.model.hero;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexander Gherschon
  */
 
-public class HeroStats {
+public class HeroStats implements Parcelable {
 
     private Integer life;
     private Integer damage;
@@ -322,4 +325,93 @@ public class HeroStats {
                 ", secondaryResource=" + secondaryResource +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.life);
+        dest.writeValue(this.damage);
+        dest.writeValue(this.toughness);
+        dest.writeValue(this.healing);
+        dest.writeValue(this.attackSpeed);
+        dest.writeValue(this.armor);
+        dest.writeValue(this.strength);
+        dest.writeValue(this.dexterity);
+        dest.writeValue(this.vitality);
+        dest.writeValue(this.intelligence);
+        dest.writeValue(this.physicalResist);
+        dest.writeValue(this.fireResist);
+        dest.writeValue(this.coldResist);
+        dest.writeValue(this.lightningResist);
+        dest.writeValue(this.poisonResist);
+        dest.writeValue(this.arcaneResist);
+        dest.writeValue(this.critDamage);
+        dest.writeValue(this.damageIncrease);
+        dest.writeValue(this.critChance);
+        dest.writeValue(this.damageReduction);
+        dest.writeValue(this.lifeSteal);
+        dest.writeValue(this.lifePerKill);
+        dest.writeValue(this.goldFind);
+        dest.writeValue(this.magicFind);
+        dest.writeValue(this.thorns);
+        dest.writeValue(this.blockChance);
+        dest.writeValue(this.blockAmountMin);
+        dest.writeValue(this.blockAmountMax);
+        dest.writeValue(this.lifeOnHit);
+        dest.writeValue(this.primaryResource);
+        dest.writeValue(this.secondaryResource);
+    }
+
+    public HeroStats() {
+    }
+
+    protected HeroStats(Parcel in) {
+        this.life = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.damage = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.toughness = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.healing = (Float) in.readValue(Float.class.getClassLoader());
+        this.attackSpeed = (Float) in.readValue(Float.class.getClassLoader());
+        this.armor = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.strength = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.dexterity = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.vitality = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.intelligence = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.physicalResist = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.fireResist = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.coldResist = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.lightningResist = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.poisonResist = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.arcaneResist = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.critDamage = (Float) in.readValue(Float.class.getClassLoader());
+        this.damageIncrease = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.critChance = (Float) in.readValue(Float.class.getClassLoader());
+        this.damageReduction = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.lifeSteal = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.lifePerKill = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.goldFind = (Float) in.readValue(Float.class.getClassLoader());
+        this.magicFind = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.thorns = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.blockChance = (Float) in.readValue(Float.class.getClassLoader());
+        this.blockAmountMin = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.blockAmountMax = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.lifeOnHit = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.primaryResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.secondaryResource = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<HeroStats> CREATOR = new Parcelable.Creator<HeroStats>() {
+        @Override
+        public HeroStats createFromParcel(Parcel source) {
+            return new HeroStats(source);
+        }
+
+        @Override
+        public HeroStats[] newArray(int size) {
+            return new HeroStats[size];
+        }
+    };
 }

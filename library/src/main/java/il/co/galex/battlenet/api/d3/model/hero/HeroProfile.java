@@ -1,7 +1,11 @@
 package il.co.galex.battlenet.api.d3.model.hero;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +17,7 @@ import il.co.galex.battlenet.api.d3.model.common.Mob;
  * @author Alexander Gherschon
  */
 
-public class HeroProfile {
+public class HeroProfile implements Parcelable {
 
     private long id;
     private String name;
@@ -209,4 +213,70 @@ public class HeroProfile {
                 ", lastUpdated=" + lastUpdated +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.name);
+        dest.writeInt(this.heroClass == null ? -1 : this.heroClass.ordinal());
+        dest.writeInt(this.gender == null ? -1 : this.gender.ordinal());
+        dest.writeLong(this.level);
+        dest.writeSerializable(this.kills);
+        dest.writeLong(this.paragonLevel);
+        dest.writeByte(this.hardcore ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.seasonal ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.seasonCreated);
+        dest.writeParcelable(this.skillSet, flags);
+        dest.writeParcelable(this.items, flags);
+        dest.writeParcelable(this.followers, flags);
+        dest.writeList(this.legendaryPowers);
+        dest.writeParcelable(this.stats, flags);
+        dest.writeParcelable(this.progression, flags);
+        dest.writeValue(this.dead);
+        dest.writeValue(this.lastUpdated);
+    }
+
+    public HeroProfile() {
+    }
+
+    protected HeroProfile(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+        int tmpHeroClass = in.readInt();
+        this.heroClass = tmpHeroClass == -1 ? null : HeroClass.values()[tmpHeroClass];
+        int tmpGender = in.readInt();
+        this.gender = tmpGender == -1 ? null : Gender.values()[tmpGender];
+        this.level = in.readLong();
+        this.kills = (HashMap<Mob, Long>) in.readSerializable();
+        this.paragonLevel = in.readLong();
+        this.hardcore = in.readByte() != 0;
+        this.seasonal = in.readByte() != 0;
+        this.seasonCreated = in.readInt();
+        this.skillSet = in.readParcelable(SkillSet.class.getClassLoader());
+        this.items = in.readParcelable(HeroItems.class.getClassLoader());
+        this.followers = in.readParcelable(Followers.class.getClassLoader());
+        this.legendaryPowers = new ArrayList<Item>();
+        in.readList(this.legendaryPowers, Item.class.getClassLoader());
+        this.stats = in.readParcelable(HeroStats.class.getClassLoader());
+        this.progression = in.readParcelable(Progression.class.getClassLoader());
+        this.dead = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.lastUpdated = (Long) in.readValue(Long.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<HeroProfile> CREATOR = new Parcelable.Creator<HeroProfile>() {
+        @Override
+        public HeroProfile createFromParcel(Parcel source) {
+            return new HeroProfile(source);
+        }
+
+        @Override
+        public HeroProfile[] newArray(int size) {
+            return new HeroProfile[size];
+        }
+    };
 }

@@ -1,10 +1,13 @@
 package il.co.galex.battlenet.api.d3.model.hero;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexander Gherschon
  */
 
-public class FollowerStats {
+public class FollowerStats implements Parcelable {
 
     private int experienceBonus;
     private int goldFind;
@@ -42,4 +45,37 @@ public class FollowerStats {
                 ", magicFind=" + magicFind +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.experienceBonus);
+        dest.writeInt(this.goldFind);
+        dest.writeInt(this.magicFind);
+    }
+
+    public FollowerStats() {
+    }
+
+    protected FollowerStats(Parcel in) {
+        this.experienceBonus = in.readInt();
+        this.goldFind = in.readInt();
+        this.magicFind = in.readInt();
+    }
+
+    public static final Parcelable.Creator<FollowerStats> CREATOR = new Parcelable.Creator<FollowerStats>() {
+        @Override
+        public FollowerStats createFromParcel(Parcel source) {
+            return new FollowerStats(source);
+        }
+
+        @Override
+        public FollowerStats[] newArray(int size) {
+            return new FollowerStats[size];
+        }
+    };
 }

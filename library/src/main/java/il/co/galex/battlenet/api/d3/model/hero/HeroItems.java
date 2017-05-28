@@ -1,10 +1,13 @@
 package il.co.galex.battlenet.api.d3.model.hero;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexander Gherschon
  */
 
-public class HeroItems {
+public class HeroItems implements Parcelable {
 
     private Item mainHand;
     private Item offHand;
@@ -142,4 +145,57 @@ public class HeroItems {
                 ", head=" + head +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.mainHand, flags);
+        dest.writeParcelable(this.offHand, flags);
+        dest.writeParcelable(this.rightFinger, flags);
+        dest.writeParcelable(this.leftFinger, flags);
+        dest.writeParcelable(this.neck, flags);
+        dest.writeParcelable(this.waist, flags);
+        dest.writeParcelable(this.torso, flags);
+        dest.writeParcelable(this.feet, flags);
+        dest.writeParcelable(this.hands, flags);
+        dest.writeParcelable(this.shoulders, flags);
+        dest.writeParcelable(this.legs, flags);
+        dest.writeParcelable(this.bracers, flags);
+        dest.writeParcelable(this.head, flags);
+    }
+
+    public HeroItems() {
+    }
+
+    protected HeroItems(Parcel in) {
+        this.mainHand = in.readParcelable(Item.class.getClassLoader());
+        this.offHand = in.readParcelable(Item.class.getClassLoader());
+        this.rightFinger = in.readParcelable(Item.class.getClassLoader());
+        this.leftFinger = in.readParcelable(Item.class.getClassLoader());
+        this.neck = in.readParcelable(Item.class.getClassLoader());
+        this.waist = in.readParcelable(Item.class.getClassLoader());
+        this.torso = in.readParcelable(Item.class.getClassLoader());
+        this.feet = in.readParcelable(Item.class.getClassLoader());
+        this.hands = in.readParcelable(Item.class.getClassLoader());
+        this.shoulders = in.readParcelable(Item.class.getClassLoader());
+        this.legs = in.readParcelable(Item.class.getClassLoader());
+        this.bracers = in.readParcelable(Item.class.getClassLoader());
+        this.head = in.readParcelable(Item.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<HeroItems> CREATOR = new Parcelable.Creator<HeroItems>() {
+        @Override
+        public HeroItems createFromParcel(Parcel source) {
+            return new HeroItems(source);
+        }
+
+        @Override
+        public HeroItems[] newArray(int size) {
+            return new HeroItems[size];
+        }
+    };
 }

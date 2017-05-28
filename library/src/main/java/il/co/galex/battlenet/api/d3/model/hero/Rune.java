@@ -1,12 +1,15 @@
 package il.co.galex.battlenet.api.d3.model.hero;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import il.co.galex.battlenet.api.d3.model.common.TooltipParams;
 
 /**
  * @author Alexander Gherschon
  */
 
-public class Rune {
+public class Rune implements Parcelable {
 
     private String slug;
     private String type;
@@ -104,4 +107,49 @@ public class Rune {
                 ", order=" + order +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.slug);
+        dest.writeString(this.type);
+        dest.writeString(this.name);
+        dest.writeInt(this.level);
+        dest.writeString(this.description);
+        dest.writeString(this.simpleDescription);
+        dest.writeParcelable(this.tooltipParams, flags);
+        dest.writeString(this.skillCalcId);
+        dest.writeInt(this.order);
+    }
+
+    public Rune() {
+    }
+
+    protected Rune(Parcel in) {
+        this.slug = in.readString();
+        this.type = in.readString();
+        this.name = in.readString();
+        this.level = in.readInt();
+        this.description = in.readString();
+        this.simpleDescription = in.readString();
+        this.tooltipParams = in.readParcelable(TooltipParams.class.getClassLoader());
+        this.skillCalcId = in.readString();
+        this.order = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Rune> CREATOR = new Parcelable.Creator<Rune>() {
+        @Override
+        public Rune createFromParcel(Parcel source) {
+            return new Rune(source);
+        }
+
+        @Override
+        public Rune[] newArray(int size) {
+            return new Rune[size];
+        }
+    };
 }

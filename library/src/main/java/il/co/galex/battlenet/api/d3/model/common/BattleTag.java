@@ -1,12 +1,15 @@
 package il.co.galex.battlenet.api.d3.model.common;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexander Gherschon
  */
 
-public class BattleTag {
+public class BattleTag implements Parcelable {
 
-    public static final String PUBLIC_SEPARATOR = "#";
+    private static final String PUBLIC_SEPARATOR = "#";
     private String name;
     private int number;
 
@@ -76,4 +79,32 @@ public class BattleTag {
                 ", number=" + number +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeInt(this.number);
+    }
+
+    protected BattleTag(Parcel in) {
+        this.name = in.readString();
+        this.number = in.readInt();
+    }
+
+    public static final Parcelable.Creator<BattleTag> CREATOR = new Parcelable.Creator<BattleTag>() {
+        @Override
+        public BattleTag createFromParcel(Parcel source) {
+            return new BattleTag(source);
+        }
+
+        @Override
+        public BattleTag[] newArray(int size) {
+            return new BattleTag[size];
+        }
+    };
 }

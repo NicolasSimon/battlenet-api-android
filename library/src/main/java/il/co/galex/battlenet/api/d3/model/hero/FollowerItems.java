@@ -1,10 +1,13 @@
 package il.co.galex.battlenet.api.d3.model.hero;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexander Gherschon
  */
 
-public class FollowerItems {
+public class FollowerItems implements Parcelable {
 
     private Item mainHand;
     private Item offHand;
@@ -72,4 +75,43 @@ public class FollowerItems {
                 ", special=" + special +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.mainHand, flags);
+        dest.writeParcelable(this.offHand, flags);
+        dest.writeParcelable(this.rightFinger, flags);
+        dest.writeParcelable(this.leftFinger, flags);
+        dest.writeParcelable(this.neck, flags);
+        dest.writeParcelable(this.special, flags);
+    }
+
+    public FollowerItems() {
+    }
+
+    protected FollowerItems(Parcel in) {
+        this.mainHand = in.readParcelable(Item.class.getClassLoader());
+        this.offHand = in.readParcelable(Item.class.getClassLoader());
+        this.rightFinger = in.readParcelable(Item.class.getClassLoader());
+        this.leftFinger = in.readParcelable(Item.class.getClassLoader());
+        this.neck = in.readParcelable(Item.class.getClassLoader());
+        this.special = in.readParcelable(Item.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<FollowerItems> CREATOR = new Parcelable.Creator<FollowerItems>() {
+        @Override
+        public FollowerItems createFromParcel(Parcel source) {
+            return new FollowerItems(source);
+        }
+
+        @Override
+        public FollowerItems[] newArray(int size) {
+            return new FollowerItems[size];
+        }
+    };
 }

@@ -1,10 +1,13 @@
 package il.co.galex.battlenet.api.d3.model.leaderboard;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexander Gherschon
  */
 
-public class Player {
+public class Player implements Parcelable {
 
     private String key;
     private Integer accountId;
@@ -42,4 +45,37 @@ public class Player {
                 ", data=" + data +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.key);
+        dest.writeValue(this.accountId);
+        dest.writeParcelable(this.data, flags);
+    }
+
+    public Player() {
+    }
+
+    protected Player(Parcel in) {
+        this.key = in.readString();
+        this.accountId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.data = in.readParcelable(PlayerData.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>() {
+        @Override
+        public Player createFromParcel(Parcel source) {
+            return new Player(source);
+        }
+
+        @Override
+        public Player[] newArray(int size) {
+            return new Player[size];
+        }
+    };
 }

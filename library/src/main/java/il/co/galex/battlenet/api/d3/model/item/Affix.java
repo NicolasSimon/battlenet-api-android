@@ -1,10 +1,13 @@
 package il.co.galex.battlenet.api.d3.model.item;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexander Gherschon
  */
 
-public class Affix {
+public class Affix implements Parcelable {
 
     private Attributes attributes;
     private AttributesRaw attributesRaw;
@@ -32,4 +35,35 @@ public class Affix {
                 ", attributesRaw=" + attributesRaw +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.attributes, flags);
+        dest.writeParcelable(this.attributesRaw, flags);
+    }
+
+    public Affix() {
+    }
+
+    protected Affix(Parcel in) {
+        this.attributes = in.readParcelable(Attributes.class.getClassLoader());
+        this.attributesRaw = in.readParcelable(AttributesRaw.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Affix> CREATOR = new Parcelable.Creator<Affix>() {
+        @Override
+        public Affix createFromParcel(Parcel source) {
+            return new Affix(source);
+        }
+
+        @Override
+        public Affix[] newArray(int size) {
+            return new Affix[size];
+        }
+    };
 }

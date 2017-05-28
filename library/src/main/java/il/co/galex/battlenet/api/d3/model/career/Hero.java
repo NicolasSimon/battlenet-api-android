@@ -1,5 +1,8 @@
 package il.co.galex.battlenet.api.d3.model.career;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import il.co.galex.battlenet.api.d3.model.common.Gender;
@@ -9,7 +12,7 @@ import il.co.galex.battlenet.api.d3.model.common.HeroClass;
  * @author Alexander Gherschon
  */
 
-public class Hero {
+public class Hero implements Parcelable {
 
     private long id;
     private String name;
@@ -26,6 +29,7 @@ public class Hero {
 
     @SerializedName("last-updated")
     private long lastUpdated;
+
 
     public long getId() {
         return id;
@@ -122,4 +126,53 @@ public class Hero {
                 ", lastUpdated=" + lastUpdated +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.name);
+        dest.writeInt(this.heroClass == null ? -1 : this.heroClass.ordinal());
+        dest.writeInt(this.gender == null ? -1 : this.gender.ordinal());
+        dest.writeInt(this.level);
+        dest.writeInt(this.paragonLevel);
+        dest.writeByte(this.hardcore ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.seasonal ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.dead ? (byte) 1 : (byte) 0);
+        dest.writeLong(this.lastUpdated);
+    }
+
+    public Hero() {
+    }
+
+    protected Hero(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+        int tmpHeroClass = in.readInt();
+        this.heroClass = tmpHeroClass == -1 ? null : HeroClass.values()[tmpHeroClass];
+        int tmpGender = in.readInt();
+        this.gender = tmpGender == -1 ? null : Gender.values()[tmpGender];
+        this.level = in.readInt();
+        this.paragonLevel = in.readInt();
+        this.hardcore = in.readByte() != 0;
+        this.seasonal = in.readByte() != 0;
+        this.dead = in.readByte() != 0;
+        this.lastUpdated = in.readLong();
+    }
+
+    public static final Parcelable.Creator<Hero> CREATOR = new Parcelable.Creator<Hero>() {
+        @Override
+        public Hero createFromParcel(Parcel source) {
+            return new Hero(source);
+        }
+
+        @Override
+        public Hero[] newArray(int size) {
+            return new Hero[size];
+        }
+    };
 }

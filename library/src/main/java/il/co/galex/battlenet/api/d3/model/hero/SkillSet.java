@@ -1,15 +1,18 @@
 package il.co.galex.battlenet.api.d3.model.hero;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * @author Alexander Gherschon
  */
 
-public class SkillSet {
+public class SkillSet implements Parcelable {
 
-    public List<ActiveSkill> active;
-    public List<PassiveSkill> passive;
+    private List<ActiveSkill> active;
+    private List<PassiveSkill> passive;
 
     public List<ActiveSkill> getActive() {
         return active;
@@ -34,4 +37,35 @@ public class SkillSet {
                 ", passive=" + passive +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(this.active);
+        dest.writeTypedList(this.passive);
+    }
+
+    public SkillSet() {
+    }
+
+    protected SkillSet(Parcel in) {
+        this.active = in.createTypedArrayList(ActiveSkill.CREATOR);
+        this.passive = in.createTypedArrayList(PassiveSkill.CREATOR);
+    }
+
+    public static final Parcelable.Creator<SkillSet> CREATOR = new Parcelable.Creator<SkillSet>() {
+        @Override
+        public SkillSet createFromParcel(Parcel source) {
+            return new SkillSet(source);
+        }
+
+        @Override
+        public SkillSet[] newArray(int size) {
+            return new SkillSet[size];
+        }
+    };
 }

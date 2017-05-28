@@ -1,10 +1,13 @@
 package il.co.galex.battlenet.api.d3.model.hero;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexander Gherschon
  */
 
-public class Skill {
+public class Skill implements Parcelable {
 
     private String slug;
     private String name;
@@ -103,4 +106,49 @@ public class Skill {
                 ", skillCalcId='" + skillCalcId + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.slug);
+        dest.writeString(this.name);
+        dest.writeString(this.icon);
+        dest.writeInt(this.level);
+        dest.writeString(this.categorySlug);
+        dest.writeString(this.tooltipUrl);
+        dest.writeString(this.description);
+        dest.writeString(this.simpleDescription);
+        dest.writeString(this.skillCalcId);
+    }
+
+    public Skill() {
+    }
+
+    protected Skill(Parcel in) {
+        this.slug = in.readString();
+        this.name = in.readString();
+        this.icon = in.readString();
+        this.level = in.readInt();
+        this.categorySlug = in.readString();
+        this.tooltipUrl = in.readString();
+        this.description = in.readString();
+        this.simpleDescription = in.readString();
+        this.skillCalcId = in.readString();
+    }
+
+    public static final Parcelable.Creator<Skill> CREATOR = new Parcelable.Creator<Skill>() {
+        @Override
+        public Skill createFromParcel(Parcel source) {
+            return new Skill(source);
+        }
+
+        @Override
+        public Skill[] newArray(int size) {
+            return new Skill[size];
+        }
+    };
 }

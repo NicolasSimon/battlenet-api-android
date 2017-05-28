@@ -1,5 +1,8 @@
 package il.co.galex.battlenet.api.d3.model.season;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -14,7 +17,7 @@ import il.co.galex.battlenet.api.d3.model.leaderboard.Title;
  * @author Alexander Gherschon
  */
 
-public class SeasonLeaderboard {
+public class SeasonLeaderboard implements Parcelable {
 
     @SerializedName("_links")
     private Links links;
@@ -119,4 +122,53 @@ public class SeasonLeaderboard {
                 ", season=" + season +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.links, flags);
+        dest.writeTypedList(this.rows);
+        dest.writeString(this.key);
+        dest.writeParcelable(this.title, flags);
+        dest.writeLong(this.lastUpdateTime != null ? this.lastUpdateTime.getTime() : -1);
+        dest.writeString(this.generatedBy);
+        dest.writeValue(this.achievementPoints);
+        dest.writeValue(this.greaterRift);
+        dest.writeInt(this.greaterRiftSoloClass == null ? -1 : this.greaterRiftSoloClass.ordinal());
+        dest.writeValue(this.season);
+    }
+
+    public SeasonLeaderboard() {
+    }
+
+    protected SeasonLeaderboard(Parcel in) {
+        this.links = in.readParcelable(Links.class.getClassLoader());
+        this.rows = in.createTypedArrayList(Row.CREATOR);
+        this.key = in.readString();
+        this.title = in.readParcelable(Title.class.getClassLoader());
+        long tmpLastUpdateTime = in.readLong();
+        this.lastUpdateTime = tmpLastUpdateTime == -1 ? null : new Date(tmpLastUpdateTime);
+        this.generatedBy = in.readString();
+        this.achievementPoints = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.greaterRift = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        int tmpGreaterRiftSoloClass = in.readInt();
+        this.greaterRiftSoloClass = tmpGreaterRiftSoloClass == -1 ? null : HeroClass.values()[tmpGreaterRiftSoloClass];
+        this.season = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<SeasonLeaderboard> CREATOR = new Parcelable.Creator<SeasonLeaderboard>() {
+        @Override
+        public SeasonLeaderboard createFromParcel(Parcel source) {
+            return new SeasonLeaderboard(source);
+        }
+
+        @Override
+        public SeasonLeaderboard[] newArray(int size) {
+            return new SeasonLeaderboard[size];
+        }
+    };
 }

@@ -1,5 +1,8 @@
 package il.co.galex.battlenet.api.d3.model.career;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,7 +14,7 @@ import il.co.galex.battlenet.api.d3.model.common.Mob;
  * @author Alexander Gherschon
  */
 
-public class CareerProfile {
+public class CareerProfile implements Parcelable {
 
     private BattleTag battleTag;
     private long paragonLevel;
@@ -229,4 +232,73 @@ public class CareerProfile {
                 ", seasonalProfiles=" + seasonalProfiles +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.battleTag, flags);
+        dest.writeLong(this.paragonLevel);
+        dest.writeLong(this.paragonLevelHardcore);
+        dest.writeLong(this.paragonLevelSeason);
+        dest.writeLong(this.paragonLevelSeasonHardcore);
+        dest.writeString(this.guildName);
+        dest.writeTypedList(this.heroes);
+        dest.writeLong(this.lastHeroPlayed);
+        dest.writeLong(this.lastHeroUpdated);
+        dest.writeSerializable(this.kills);
+        dest.writeLong(this.highestHardcoreLevel);
+        dest.writeSerializable(this.timePlayed);
+        dest.writeSerializable(this.progression);
+        dest.writeTypedList(this.fallenHeroes);
+        dest.writeParcelable(this.blacksmith, flags);
+        dest.writeParcelable(this.jeweler, flags);
+        dest.writeParcelable(this.mystic, flags);
+        dest.writeParcelable(this.blacksmithHardcore, flags);
+        dest.writeParcelable(this.jewelerHardcore, flags);
+        dest.writeParcelable(this.mysticHardcore, flags);
+        dest.writeSerializable(this.seasonalProfiles);
+    }
+
+    public CareerProfile() {
+    }
+
+    protected CareerProfile(Parcel in) {
+        this.battleTag = in.readParcelable(BattleTag.class.getClassLoader());
+        this.paragonLevel = in.readLong();
+        this.paragonLevelHardcore = in.readLong();
+        this.paragonLevelSeason = in.readLong();
+        this.paragonLevelSeasonHardcore = in.readLong();
+        this.guildName = in.readString();
+        this.heroes = in.createTypedArrayList(Hero.CREATOR);
+        this.lastHeroPlayed = in.readLong();
+        this.lastHeroUpdated = in.readLong();
+        this.kills = (HashMap<Mob, Long>) in.readSerializable();
+        this.highestHardcoreLevel = in.readLong();
+        this.timePlayed = (HashMap<HeroClass, Float>) in.readSerializable();
+        this.progression = (HashMap<Act, Boolean>) in.readSerializable();
+        this.fallenHeroes = in.createTypedArrayList(Hero.CREATOR);
+        this.blacksmith = in.readParcelable(Artisan.class.getClassLoader());
+        this.jeweler = in.readParcelable(Artisan.class.getClassLoader());
+        this.mystic = in.readParcelable(Artisan.class.getClassLoader());
+        this.blacksmithHardcore = in.readParcelable(Artisan.class.getClassLoader());
+        this.jewelerHardcore = in.readParcelable(Artisan.class.getClassLoader());
+        this.mysticHardcore = in.readParcelable(Artisan.class.getClassLoader());
+        this.seasonalProfiles = (HashMap<String, SeasonProfile>) in.readSerializable();
+    }
+
+    public static final Parcelable.Creator<CareerProfile> CREATOR = new Parcelable.Creator<CareerProfile>() {
+        @Override
+        public CareerProfile createFromParcel(Parcel source) {
+            return new CareerProfile(source);
+        }
+
+        @Override
+        public CareerProfile[] newArray(int size) {
+            return new CareerProfile[size];
+        }
+    };
 }

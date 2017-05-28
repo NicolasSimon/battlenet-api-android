@@ -1,5 +1,8 @@
 package il.co.galex.battlenet.api.d3.model.hero;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 import il.co.galex.battlenet.api.d3.model.common.TooltipParams;
@@ -8,7 +11,7 @@ import il.co.galex.battlenet.api.d3.model.common.TooltipParams;
  * @author Alexander Gherschon
  */
 
-public class Item {
+public class Item implements Parcelable {
 
     private String id;
     private String name;
@@ -96,5 +99,48 @@ public class Item {
                 ", dyeColor=" + dyeColor +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.icon);
+        dest.writeString(this.displayColor);
+        dest.writeParcelable(this.tooltipParams, flags);
+        dest.writeParcelable(this.transmogItem, flags);
+        dest.writeStringList(this.setItemsEquipped);
+        dest.writeParcelable(this.dyeColor, flags);
+    }
+
+    public Item() {
+    }
+
+    protected Item(Parcel in) {
+        this.id = in.readString();
+        this.name = in.readString();
+        this.icon = in.readString();
+        this.displayColor = in.readString();
+        this.tooltipParams = in.readParcelable(TooltipParams.class.getClassLoader());
+        this.transmogItem = in.readParcelable(TransmogItem.class.getClassLoader());
+        this.setItemsEquipped = in.createStringArrayList();
+        this.dyeColor = in.readParcelable(DyeColor.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>() {
+        @Override
+        public Item createFromParcel(Parcel source) {
+            return new Item(source);
+        }
+
+        @Override
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
 }
 

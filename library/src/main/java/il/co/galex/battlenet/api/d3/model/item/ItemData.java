@@ -1,5 +1,9 @@
 package il.co.galex.battlenet.api.d3.model.item;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import il.co.galex.battlenet.api.d3.model.common.TooltipParams;
@@ -8,7 +12,7 @@ import il.co.galex.battlenet.api.d3.model.common.TooltipParams;
  * @author Alexander Gherschon
  */
 
-public class ItemData {
+public class ItemData implements Parcelable {
 
     private String id;
     private String name;
@@ -292,4 +296,88 @@ public class ItemData {
                 ", blockChance='" + blockChance + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.icon);
+        dest.writeString(this.displayColor);
+        dest.writeParcelable(this.tooltipParams, flags);
+        dest.writeValue(this.requiredLevel);
+        dest.writeValue(this.itemLevel);
+        dest.writeValue(this.stackSizemax);
+        dest.writeValue(this.bonusAffixes);
+        dest.writeValue(this.bonusAffixesMax);
+        dest.writeValue(this.accountBound);
+        dest.writeString(this.flavorText);
+        dest.writeString(this.typeName);
+        dest.writeParcelable(this.type, flags);
+        dest.writeString(this.damageRange);
+        dest.writeParcelable(this.dps, flags);
+        dest.writeParcelable(this.attacksPerSecond, flags);
+        dest.writeString(this.attacksPerSecondText);
+        dest.writeParcelable(this.minDamage, flags);
+        dest.writeParcelable(this.maxDamage, flags);
+        dest.writeStringList(this.slots);
+        dest.writeParcelable(this.attributes, flags);
+        dest.writeParcelable(this.attributesRaw, flags);
+        dest.writeList(this.randomAffixes);
+        dest.writeValue(this.seasonRequiredToDrop);
+        dest.writeValue(this.isSeasonRequiredToDrop);
+        dest.writeString(this.description);
+        dest.writeString(this.blockChance);
+    }
+
+    public ItemData() {
+    }
+
+    protected ItemData(Parcel in) {
+        this.id = in.readString();
+        this.name = in.readString();
+        this.icon = in.readString();
+        this.displayColor = in.readString();
+        this.tooltipParams = in.readParcelable(TooltipParams.class.getClassLoader());
+        this.requiredLevel = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.itemLevel = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.stackSizemax = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.bonusAffixes = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.bonusAffixesMax = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.accountBound = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.flavorText = in.readString();
+        this.typeName = in.readString();
+        this.type = in.readParcelable(ItemType.class.getClassLoader());
+        this.damageRange = in.readString();
+        this.dps = in.readParcelable(FloatRange.class.getClassLoader());
+        this.attacksPerSecond = in.readParcelable(FloatRange.class.getClassLoader());
+        this.attacksPerSecondText = in.readString();
+        this.minDamage = in.readParcelable(IntRange.class.getClassLoader());
+        this.maxDamage = in.readParcelable(IntRange.class.getClassLoader());
+        this.slots = in.createStringArrayList();
+        this.attributes = in.readParcelable(Attributes.class.getClassLoader());
+        this.attributesRaw = in.readParcelable(AttributesRaw.class.getClassLoader());
+        this.randomAffixes = new ArrayList<RandomAffix>();
+        in.readList(this.randomAffixes, RandomAffix.class.getClassLoader());
+        this.seasonRequiredToDrop = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.isSeasonRequiredToDrop = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.description = in.readString();
+        this.blockChance = in.readString();
+    }
+
+    public static final Parcelable.Creator<ItemData> CREATOR = new Parcelable.Creator<ItemData>() {
+        @Override
+        public ItemData createFromParcel(Parcel source) {
+            return new ItemData(source);
+        }
+
+        @Override
+        public ItemData[] newArray(int size) {
+            return new ItemData[size];
+        }
+    };
 }

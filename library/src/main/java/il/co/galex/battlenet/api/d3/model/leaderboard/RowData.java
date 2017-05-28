@@ -1,12 +1,15 @@
 package il.co.galex.battlenet.api.d3.model.leaderboard;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import il.co.galex.battlenet.api.d3.model.common.BattleTag;
 
 /**
  * @author Alexander Gherschon
  */
 
-public class RowData {
+public class RowData implements Parcelable {
 
     private Integer rank;
     private Integer achievementPoints;
@@ -74,4 +77,43 @@ public class RowData {
                 ", battleTag=" + battleTag +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.rank);
+        dest.writeValue(this.achievementPoints);
+        dest.writeValue(this.riftLevel);
+        dest.writeValue(this.riftTime);
+        dest.writeValue(this.completedTime);
+        dest.writeParcelable(this.battleTag, flags);
+    }
+
+    public RowData() {
+    }
+
+    protected RowData(Parcel in) {
+        this.rank = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.achievementPoints = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.riftLevel = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.riftTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.completedTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.battleTag = in.readParcelable(BattleTag.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<RowData> CREATOR = new Parcelable.Creator<RowData>() {
+        @Override
+        public RowData createFromParcel(Parcel source) {
+            return new RowData(source);
+        }
+
+        @Override
+        public RowData[] newArray(int size) {
+            return new RowData[size];
+        }
+    };
 }

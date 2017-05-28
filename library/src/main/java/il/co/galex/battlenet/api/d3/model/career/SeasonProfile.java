@@ -1,5 +1,8 @@
 package il.co.galex.battlenet.api.d3.model.career;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.HashMap;
 
 import il.co.galex.battlenet.api.d3.model.common.HeroClass;
@@ -9,7 +12,7 @@ import il.co.galex.battlenet.api.d3.model.common.Mob;
  * @author Alexander Gherschon
  */
 
-public class SeasonProfile {
+public class SeasonProfile implements Parcelable {
 
     private int seasonId;
     private long paragonLevel;
@@ -77,4 +80,43 @@ public class SeasonProfile {
                 ", highestHardcoreLevel=" + highestHardcoreLevel +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.seasonId);
+        dest.writeLong(this.paragonLevel);
+        dest.writeLong(this.paragonLevelHardcore);
+        dest.writeSerializable(this.kills);
+        dest.writeSerializable(this.timePlayed);
+        dest.writeLong(this.highestHardcoreLevel);
+    }
+
+    public SeasonProfile() {
+    }
+
+    protected SeasonProfile(Parcel in) {
+        this.seasonId = in.readInt();
+        this.paragonLevel = in.readLong();
+        this.paragonLevelHardcore = in.readLong();
+        this.kills = (HashMap<Mob, Long>) in.readSerializable();
+        this.timePlayed = (HashMap<HeroClass, Float>) in.readSerializable();
+        this.highestHardcoreLevel = in.readLong();
+    }
+
+    public static final Parcelable.Creator<SeasonProfile> CREATOR = new Parcelable.Creator<SeasonProfile>() {
+        @Override
+        public SeasonProfile createFromParcel(Parcel source) {
+            return new SeasonProfile(source);
+        }
+
+        @Override
+        public SeasonProfile[] newArray(int size) {
+            return new SeasonProfile[size];
+        }
+    };
 }
